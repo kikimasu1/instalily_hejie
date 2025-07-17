@@ -1,0 +1,181 @@
+# PartSelect AI Chat Agent - Complete Implementation
+
+Build a modern, responsive chat interface for PartSelect's e-commerce platform focused on Refrigerator and Dishwasher parts. The system should help customers find parts, get installation guidance, and troubleshoot appliance issues.
+
+## Frontend Requirements
+
+### React Chat Interface
+Create a modern React application with:
+
+**Chat UI Components:**
+- Clean, responsive chat interface matching PartSelect's branding (blue/white color scheme)
+- Message bubbles with user/agent distinction
+- Typing indicators and message timestamps
+- Product cards that display inline in chat with images, prices, and "Add to Cart" buttons
+- File upload capability for users to share appliance photos
+- Quick action buttons for common queries ("Find Parts", "Installation Help", "Troubleshooting")
+
+**Features to Include:**
+- Search autocomplete for part numbers and appliance models
+- Shopping cart integration showing items added during chat
+- Order status lookup functionality
+- Installation guide viewer (PDF/video embedding)
+- Live typing indicator
+- Message history persistence
+- Mobile-responsive design
+
+### Key User Flows
+1. **Part Identification**: "I need a water filter for my Whirlpool fridge"
+2. **Compatibility Check**: "Is part PS11752778 compatible with my WDT780SAEM1?"
+3. **Troubleshooting**: "My ice maker isn't working"
+4. **Installation Help**: Step-by-step guidance with visual aids
+
+## Backend Architecture
+
+### Core Components
+**Express.js Server with:**
+- RESTful API endpoints for chat interactions
+- WebSocket support for real-time messaging
+- Session management for conversation state
+- Product database integration (mock data for demo)
+
+**AI Integration:**
+- Deepseek language model integration via API
+- Custom prompt engineering for PartSelect domain
+- Vector database for product embeddings (use Pinecone or similar)
+- RAG implementation for accessing product manuals and troubleshooting guides
+
+### Database Schema
+```javascript
+// Mock data structures to implement
+const products = {
+  refrigerator_parts: [],
+  dishwasher_parts: [],
+  compatibility_matrix: {},
+  installation_guides: {},
+  troubleshooting_docs: {}
+}
+```
+
+### API Endpoints
+- `POST /api/chat` - Main chat interaction
+- `GET /api/products/search` - Product search
+- `GET /api/products/:id/compatibility` - Compatibility check
+- `GET /api/installation-guide/:partId` - Installation instructions
+- `POST /api/cart/add` - Add items to cart
+
+## Agent Capabilities
+
+### Core Functions
+1. **Product Search & Recommendation**
+   - Natural language part search
+   - Model number recognition
+   - Compatible part suggestions
+   - Price comparisons
+
+2. **Compatibility Verification**
+   - Cross-reference part numbers with appliance models
+   - Explain compatibility issues
+   - Suggest alternatives
+
+3. **Installation Support**
+   - Step-by-step installation guides
+   - Tool requirements
+   - Safety warnings
+   - Video tutorial links
+
+4. **Troubleshooting Assistant**
+   - Diagnostic questions
+   - Common issue identification
+   - Repair vs. replace recommendations
+
+### Sample Interactions to Handle
+```
+User: "How can I install part number PS11752778?"
+Agent: Shows installation guide, required tools, estimated time
+
+User: "Is this part compatible with my WDT780SAEM1 model?"
+Agent: Checks compatibility matrix, provides yes/no with explanation
+
+User: "The ice maker on my Whirlpool fridge is not working. How can I fix it?"
+Agent: Asks diagnostic questions, suggests troubleshooting steps or replacement parts
+```
+
+## Technical Implementation
+
+### Frontend Stack
+- React 18+ with hooks
+- Material-UI or Tailwind CSS for styling
+- React Router for navigation
+- Socket.io for real-time messaging
+- Axios for API calls
+
+### Backend Stack
+- Node.js with Express
+- Socket.io for WebSocket connections
+- Deepseek API integration
+- Vector database (Pinecone/Chroma)
+- JWT for authentication
+
+### AI Prompt Strategy
+```javascript
+const systemPrompt = `You are a helpful PartSelect customer service agent specializing in refrigerator and dishwasher parts. 
+
+Key behaviors:
+- Only discuss refrigerator and dishwasher parts and related topics
+- Always verify part compatibility before recommending
+- Provide clear installation instructions when requested
+- Ask clarifying questions for troubleshooting
+- Suggest multiple options when available
+- Include part numbers, prices, and availability
+- Deflect non-appliance related questions politely
+
+Available actions:
+- search_parts(query, appliance_type)
+- check_compatibility(part_number, model_number)
+- get_installation_guide(part_number)
+- add_to_cart(part_number, quantity)
+- get_troubleshooting_steps(issue, appliance_model)`;
+```
+
+## File Structure
+```
+partselect-chat/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Chat/
+│   │   │   ├── ProductCard/
+│   │   │   └── Cart/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   └── utils/
+├── backend/
+│   ├── routes/
+│   ├── models/
+│   ├── services/
+│   │   ├── deepseek.js
+│   │   ├── vectorDB.js
+│   │   └── productSearch.js
+│   └── middleware/
+└── data/
+    ├── products.json
+    ├── compatibility.json
+    └── guides/
+```
+
+## Evaluation Criteria Focus
+- **User Experience**: Intuitive chat flow, helpful responses, visual product displays
+- **Agentic Architecture**: Smart routing, context awareness, tool usage
+- **Extensibility**: Easy to add new appliance categories, modular design
+- **Scalability**: Efficient database queries, caching, rate limiting
+- **Accuracy**: Correct part recommendations, reliable compatibility checking
+
+## Deliverables
+1. Working React chat interface
+2. Express backend with Deepseek integration
+3. Mock product database with realistic data
+4. Documentation of architecture and API endpoints
+5. Demo handling the three example queries provided
+
+Start with a basic chat interface and gradually add the product search, compatibility checking, and troubleshooting features. Focus on making the agent responses helpful and contextually aware while maintaining strict scope to appliance parts only.
