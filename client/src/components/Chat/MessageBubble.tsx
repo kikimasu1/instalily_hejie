@@ -26,7 +26,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
               : 'bg-white border border-border-light rounded-tl-sm shadow-custom-md hover:shadow-custom-lg'
           }`}
         >
-          <div className={`text-sm sm:text-base leading-relaxed ${message.isUser ? 'text-white' : 'text-text-dark'}`}>
+          <div className={`text-sm sm:text-base leading-relaxed font-medium ${message.isUser ? 'text-white' : 'text-gray-900'}`}>
             {message.content.split('\n').map((line, i) => (
               <p key={i} className={i > 0 ? 'mt-2 sm:mt-3' : ''}>
                 {line}
@@ -44,7 +44,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           )}
         </div>
         
-        <p className={`text-xs text-gray-400 mt-1 sm:mt-2 font-medium ${message.isUser ? 'text-right' : ''}`}>
+        <p className={`text-xs text-gray-500 mt-1 sm:mt-2 font-medium ${message.isUser ? 'text-right' : ''}`}>
           {timeAgo}
         </p>
       </div>

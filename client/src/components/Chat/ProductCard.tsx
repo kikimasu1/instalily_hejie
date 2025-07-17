@@ -50,8 +50,8 @@ export default function ProductCard({ productId }: ProductCardProps) {
           className="w-full sm:w-20 h-32 sm:h-20 rounded-xl object-cover shadow-custom-sm"
         />
         <div className="flex-1 w-full">
-          <h4 className="font-semibold text-text-dark text-base sm:text-lg leading-tight">{product.name}</h4>
-          <p className="text-sm text-gray-600 font-medium mt-1">Part #{product.partNumber}</p>
+          <h4 className="font-semibold text-gray-900 text-base sm:text-lg leading-tight">{product.name}</h4>
+          <p className="text-sm text-gray-700 font-medium mt-1">Part #{product.partNumber}</p>
           <div className="flex items-center space-x-2 mt-2">
             {product.compatibleModels && product.compatibleModels.length > 0 && (
               <p className="text-xs text-success-green font-medium bg-green-50 px-2 py-1 rounded-full">

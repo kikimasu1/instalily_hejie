@@ -211,10 +211,10 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             </div>
             <div className="flex-1">
               <div className="bg-white rounded-2xl rounded-tl-sm p-4 sm:p-6 shadow-custom-md border border-border-light max-w-[280px] sm:max-w-lg">
-                <p className="text-text-dark text-sm sm:text-base leading-relaxed">Hi! I'm your PartSelect AI assistant. I can help you find refrigerator and dishwasher parts, check compatibility, provide installation guidance, and troubleshoot appliance issues.</p>
-                <p className="text-text-dark mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">What can I help you with today?</p>
+                <p className="text-gray-900 font-medium text-sm sm:text-base leading-relaxed">Hi! I'm your PartSelect AI assistant. I can help you find refrigerator and dishwasher parts, check compatibility, provide installation guidance, and troubleshoot appliance issues.</p>
+                <p className="text-gray-900 font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">What can I help you with today?</p>
               </div>
-              <p className="text-xs text-gray-400 mt-1 sm:mt-2 font-medium">Just now</p>
+              <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-medium">Just now</p>
             </div>
           </div>
         )}
@@ -239,7 +239,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
                 onChange={handleTextareaChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask about parts..."
-                className="pr-16 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
+                className="pr-16 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
                 rows={1}
               />
               <div className="absolute right-2 sm:right-3 bottom-2 sm:bottom-3 flex items-center space-x-1">
