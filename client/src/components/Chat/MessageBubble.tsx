@@ -18,7 +18,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
         </div>
       )}
       
-      <div className={`flex-1 ${message.isUser ? 'flex justify-end' : ''}`}>
+      <div className={`flex-1 ${message.isUser ? 'flex flex-col items-end' : ''}`}>
         <div
           className={`rounded-2xl p-5 max-w-lg transition-smooth ${
             message.isUser
