@@ -42,16 +42,16 @@ export default function CartSidebar({ sessionId, onClose, isMobile = false }: Ca
   return (
     <div className="h-full bg-white border-r border-border-light flex flex-col">
       {/* Cart Header */}
-      <div className="p-4 border-b border-border-light">
+      <div className="p-3 sm:p-4 border-b border-border-light">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-text-dark">Shopping Cart</h2>
+          <h2 className="text-base sm:text-lg font-semibold text-text-dark">Shopping Cart</h2>
           <div className="flex items-center space-x-2">
             <span className="bg-partselect-blue text-white text-xs px-2 py-1 rounded-full">
               {itemCount}
             </span>
             {isMobile && onClose && (
               <Button variant="ghost" size="icon" onClick={onClose}>
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             )}
           </div>
@@ -59,16 +59,16 @@ export default function CartSidebar({ sessionId, onClose, isMobile = false }: Ca
       </div>
 
       {/* Cart Items */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-3 sm:p-4">
         {items.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-gray-500 mb-4">Your cart is empty</p>
-            <p className="text-sm text-gray-400">
+          <div className="text-center py-6 sm:py-8">
+            <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">Your cart is empty</p>
+            <p className="text-xs sm:text-sm text-gray-400">
               Add parts to your cart from the chat to get started
             </p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {items.map((item) => (
               <CartItem key={item.id} item={item} sessionId={sessionId} />
             ))}

@@ -60,7 +60,7 @@ export default function ChatPage() {
         {/* Mobile Sidebar Overlay */}
         {isMobile && isSidebarOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300">
-            <div className="absolute right-0 top-0 h-full w-80 max-w-full bg-white transform transition-transform duration-300 shadow-custom-lg">
+            <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-white transform transition-transform duration-300 shadow-custom-lg">
               <CartSidebar 
                 sessionId={sessionId} 
                 onClose={() => setIsSidebarOpen(false)}

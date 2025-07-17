@@ -42,15 +42,15 @@ export default function ProductCard({ productId }: ProductCardProps) {
   };
 
   return (
-    <div className="border border-border-light rounded-xl p-5 bg-white shadow-custom-md hover:shadow-custom-lg transition-smooth hover-lift">
-      <div className="flex items-start space-x-4">
+    <div className="border border-border-light rounded-xl p-3 sm:p-5 bg-white shadow-custom-md hover:shadow-custom-lg transition-smooth hover-lift">
+      <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4">
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-20 h-20 rounded-xl object-cover shadow-custom-sm"
+          className="w-full sm:w-20 h-32 sm:h-20 rounded-xl object-cover shadow-custom-sm"
         />
-        <div className="flex-1">
-          <h4 className="font-semibold text-text-dark text-lg leading-tight">{product.name}</h4>
+        <div className="flex-1 w-full">
+          <h4 className="font-semibold text-text-dark text-base sm:text-lg leading-tight">{product.name}</h4>
           <p className="text-sm text-gray-600 font-medium mt-1">Part #{product.partNumber}</p>
           <div className="flex items-center space-x-2 mt-2">
             {product.compatibleModels && product.compatibleModels.length > 0 && (
@@ -60,13 +60,13 @@ export default function ProductCard({ productId }: ProductCardProps) {
               </p>
             )}
           </div>
-          <div className="flex items-center justify-between mt-3">
-            <span className="text-xl font-bold text-partselect-blue">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-3 space-y-2 sm:space-y-0">
+            <span className="text-lg sm:text-xl font-bold text-partselect-blue">
               ${product.price}
             </span>
             <Button
               onClick={handleAddToCart}
-              className="bg-gradient-to-r from-success-green to-green-600 text-white hover:from-green-600 hover:to-green-700 text-sm px-4 py-2 rounded-lg font-medium transition-smooth shadow-custom-sm hover:shadow-custom-md"
+              className="bg-gradient-to-r from-success-green to-green-600 text-white hover:from-green-600 hover:to-green-700 text-sm px-4 py-2 rounded-lg font-medium transition-smooth shadow-custom-sm hover:shadow-custom-md w-full sm:w-auto"
             >
               Add to Cart
             </Button>
@@ -74,9 +74,9 @@ export default function ProductCard({ productId }: ProductCardProps) {
         </div>
       </div>
       
-      <div className="mt-4 pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-between text-sm text-gray-600">
-          <div className="flex items-center space-x-4">
+      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-gray-600 space-y-2 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
             <div className="flex items-center space-x-1">
               <Truck className="h-4 w-4 text-partselect-blue" />
               <span className="font-medium">Free shipping on orders over $50</span>
