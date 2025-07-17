@@ -85,6 +85,11 @@ export const insertInstallationGuideSchema = createInsertSchema(installationGuid
   id: true,
 });
 
+export interface DeepseekMessage {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type Product = typeof products.$inferSelect;

@@ -118,7 +118,14 @@ export class MemStorage implements IStorage {
 
   async createProduct(insertProduct: InsertProduct): Promise<Product> {
     const id = this.currentProductId++;
-    const product: Product = { ...insertProduct, id };
+    const product: Product = { 
+      ...insertProduct, 
+      id,
+      inStock: insertProduct.inStock ?? true,
+      rating: insertProduct.rating ?? null,
+      reviewCount: insertProduct.reviewCount ?? null,
+      compatibleModels: insertProduct.compatibleModels ?? null
+    };
     this.products.set(id, product);
     return product;
   }
@@ -133,7 +140,8 @@ export class MemStorage implements IStorage {
     const message: ChatMessage = { 
       ...insertMessage, 
       id, 
-      timestamp: new Date() 
+      timestamp: new Date(),
+      productCards: insertMessage.productCards ?? null
     };
     
     const sessionMessages = this.chatMessages.get(insertMessage.sessionId) || [];
@@ -163,7 +171,7 @@ export class MemStorage implements IStorage {
     const existingItem = sessionItems.find(item => item.productId === insertItem.productId);
     
     if (existingItem) {
-      existingItem.quantity += insertItem.quantity;
+      existingItem.quantity += insertItem.quantity ?? 1;
       return existingItem;
     }
     
@@ -171,7 +179,8 @@ export class MemStorage implements IStorage {
     const item: CartItem = { 
       ...insertItem, 
       id, 
-      addedAt: new Date() 
+      addedAt: new Date(),
+      quantity: insertItem.quantity ?? 1
     };
     
     sessionItems.push(item);
@@ -219,7 +228,15 @@ export class MemStorage implements IStorage {
 
   async createInstallationGuide(insertGuide: InsertInstallationGuide): Promise<InstallationGuide> {
     const id = this.currentGuideId++;
-    const guide: InstallationGuide = { ...insertGuide, id };
+    const guide: InstallationGuide = { 
+      ...insertGuide, 
+      id,
+      tools: insertGuide.tools ?? null,
+      estimatedTime: insertGuide.estimatedTime ?? null,
+      difficulty: insertGuide.difficulty ?? null,
+      videoUrl: insertGuide.videoUrl ?? null,
+      pdfUrl: insertGuide.pdfUrl ?? null
+    };
     this.installationGuides.set(guide.partNumber, guide);
     return guide;
   }
