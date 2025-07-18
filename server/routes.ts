@@ -310,44 +310,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
             }
           });
 
-          // Generate AI response
-          setTimeout(async () => {
-            try {
-              const history = await storage.getChatMessages(sessionId);
-              const conversationHistory: DeepseekMessage[] = history
-                .slice(-6)
-                .map(msg => ({
-                  role: msg.isUser ? 'user' : 'assistant',
-                  content: msg.content
-                }));
+          // Check if user message appears to be a question or request that needs AI response
+          const isQuestion = content.includes('?') || 
+                           content.toLowerCase().includes('help') ||
+                           content.toLowerCase().includes('find') ||
+                           content.toLowerCase().includes('what') ||
+                           content.toLowerCase().includes('how') ||
+                           content.toLowerCase().includes('why') ||
+                           content.toLowerCase().includes('where') ||
+                           content.toLowerCase().includes('when') ||
+                           content.toLowerCase().includes('can you') ||
+                           content.toLowerCase().includes('need') ||
+                           content.toLowerCase().includes('looking for') ||
+                           content.toLowerCase().includes('problem') ||
+                           content.toLowerCase().includes('issue') ||
+                           content.toLowerCase().includes('broken') ||
+                           content.toLowerCase().includes('not working') ||
+                           content.toLowerCase().includes('compatible') ||
+                           content.toLowerCase().includes('part') ||
+                           content.toLowerCase().includes('install') ||
+                           content.toLowerCase().includes('repair') ||
+                           content.toLowerCase().includes('replace') ||
+                           content.length > 10; // Assume longer messages need responses
 
-              const aiResponse = await deepseekService.processUserMessage(content, conversationHistory);
-              
-              await storage.createChatMessage({
-                sessionId,
-                content: aiResponse,
-                isUser: false,
-                productCards: []
-              });
-
-              // Broadcast AI response
-              wss.clients.forEach((client: WebSocketWithSession) => {
-                if (client.sessionId === sessionId && 
-                    client.readyState === WebSocket.OPEN) {
-                  client.send(JSON.stringify({
-                    type: 'message',
-                    message: {
-                      content: aiResponse,
-                      isUser: false,
-                      timestamp: new Date()
-                    }
+          // Generate AI response only if it appears to be a question or request
+          if (isQuestion) {
+            setTimeout(async () => {
+              try {
+                const history = await storage.getChatMessages(sessionId);
+                const conversationHistory: DeepseekMessage[] = history
+                  .slice(-6)
+                  .map(msg => ({
+                    role: msg.isUser ? 'user' : 'assistant',
+                    content: msg.content
                   }));
-                }
-              });
-            } catch (error) {
-              console.error('Error generating AI response:', error);
-            }
-          }, 1000); // Simulate typing delay
+
+                const aiResponse = await deepseekService.processUserMessage(content, conversationHistory);
+                
+                await storage.createChatMessage({
+                  sessionId,
+                  content: aiResponse,
+                  isUser: false,
+                  productCards: []
+                });
+
+                // Broadcast AI response
+                wss.clients.forEach((client: WebSocketWithSession) => {
+                  if (client.sessionId === sessionId && 
+                      client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify({
+                      type: 'message',
+                      message: {
+                        content: aiResponse,
+                        isUser: false,
+                        timestamp: new Date()
+                      }
+                    }));
+                  }
+                });
+              } catch (error) {
+                console.error('Error generating AI response:', error);
+              }
+            }, 1000); // Simulate typing delay
+          }
         }
       } catch (error) {
         console.error('WebSocket message error:', error);
