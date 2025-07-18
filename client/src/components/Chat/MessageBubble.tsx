@@ -1,7 +1,8 @@
 import { formatDistanceToNow } from "date-fns";
-import { Bot, User } from "lucide-react";
+import { User } from "lucide-react";
 import ProductCard from "./ProductCard";
 import type { ChatMessage } from "@shared/schema";
+import partSelectLogo from "@assets/image_1752870152809.png";
 
 interface MessageBubbleProps {
   message: ChatMessage;
@@ -13,8 +14,12 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
   return (
     <div className={`flex items-start space-x-2 sm:space-x-4 ${message.isUser ? 'justify-end' : ''}`}>
       {!message.isUser && (
-        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-partselect-blue to-partselect-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
-          <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md overflow-hidden">
+          <img 
+            src={partSelectLogo} 
+            alt="PartSelect AI Assistant" 
+            className="w-full h-full object-contain p-0.5"
+          />
         </div>
       )}
       
