@@ -9,7 +9,11 @@ import {
   Filter,
   Shield,
   Cog,
-  ChevronRight
+  ChevronRight,
+  Package,
+  Truck,
+  RotateCcw,
+  HelpCircle
 } from "lucide-react";
 
 interface InteractiveOption {
@@ -47,6 +51,14 @@ export default function InteractiveButtons({
         return Filter;
       case 'seal':
         return Shield;
+      case 'order':
+        return Package;
+      case 'tracking':
+        return Truck;
+      case 'return':
+        return RotateCcw;
+      case 'support':
+        return HelpCircle;
       default:
         return Search;
     }

@@ -178,6 +178,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Order support endpoints
+  app.post("/api/orders/track", async (req, res) => {
+    try {
+      const { orderNumber, email } = req.body;
+      
+      if (!orderNumber) {
+        return res.status(400).json({ error: "Order number required" });
+      }
+
+      // Mock order tracking data - replace with real API integration
+      const orderStatus = {
+        orderNumber,
+        status: "Processing",
+        estimatedDelivery: "3-5 business days",
+        items: [
+          { name: "Refrigerator Water Filter", partNumber: "DA29-00020B", quantity: 1 },
+        ],
+        tracking: {
+          carrier: "UPS",
+          trackingNumber: "1Z999AA1234567890",
+          lastUpdate: "Order processed and ready for shipment"
+        }
+      };
+
+      res.json({ order: orderStatus });
+    } catch (error) {
+      console.error("Order tracking error:", error);
+      res.status(500).json({ error: "Failed to track order" });
+    }
+  });
+
+  app.post("/api/orders/return", async (req, res) => {
+    try {
+      const { orderNumber, reason, email } = req.body;
+      
+      if (!orderNumber || !reason) {
+        return res.status(400).json({ error: "Order number and reason required" });
+      }
+
+      // Mock return process - replace with real API integration
+      const returnRequest = {
+        returnId: `RTN-${Date.now()}`,
+        orderNumber,
+        status: "Return initiated",
+        instructions: "A prepaid return label will be emailed to you within 24 hours.",
+        estimatedRefund: "5-7 business days after we receive the item"
+      };
+
+      res.json({ return: returnRequest });
+    } catch (error) {
+      console.error("Return processing error:", error);
+      res.status(500).json({ error: "Failed to process return" });
+    }
+  });
+
   // Analytics endpoints
   app.get("/api/analytics/system", async (req, res) => {
     try {

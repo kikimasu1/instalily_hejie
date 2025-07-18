@@ -72,6 +72,24 @@ export default function MessageBubble({ message, onQuickAction }: MessageBubbleP
       ];
     }
     
+    if (content.includes('view products') || content.includes('show products') || content.includes('product cards')) {
+      return [
+        { id: '1', text: 'Water Filters', category: 'filter', action: 'Show me water filters for my refrigerator' },
+        { id: '2', text: 'Door Seals & Gaskets', category: 'seal', action: 'I need door seals and gaskets' },
+        { id: '3', text: 'Ice Maker Parts', category: 'part', action: 'Show me ice maker parts and components' },
+        { id: '4', text: 'Dishwasher Racks', category: 'part', action: 'I need dishwasher racks and accessories' }
+      ];
+    }
+    
+    if (content.includes('order support') || content.includes('track order') || content.includes('return')) {
+      return [
+        { id: '1', text: 'Track My Order', category: 'order', action: 'I want to track my order status' },
+        { id: '2', text: 'Return/Exchange', category: 'order', action: 'I need to return or exchange an item' },
+        { id: '3', text: 'Shipping Questions', category: 'order', action: 'I have questions about shipping and delivery' },
+        { id: '4', text: 'Installation Help', category: 'repair', action: 'I need help installing my purchased part' }
+      ];
+    }
+    
     return [];
   };
 
