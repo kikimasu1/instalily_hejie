@@ -251,15 +251,6 @@ export default function ChatInterface({
                   Whether it's refrigerators, dishwashers, or other appliances -
                   let's fix it right the first time!
                 </p>
-                <div className="mt-3 sm:mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-sm font-medium text-blue-800 mb-2">💡 How to get started:</p>
-                  <ul className="text-xs text-blue-700 space-y-1">
-                    <li>• <strong>Find Products:</strong> Tell me your appliance model or describe the part you need</li>
-                    <li>• <strong>View Recommendations:</strong> I'll show product cards with prices, compatibility, and ratings</li>
-                    <li>• <strong>Add to Cart:</strong> Click "Add to Cart" on any product card</li>
-                    <li>• <strong>Order Support:</strong> Need help with existing orders? Just ask!</li>
-                  </ul>
-                </div>
               </div>
               <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-medium">
                 Just now
