@@ -13,7 +13,6 @@ import {
   Send, 
   Paperclip, 
   Camera,
-  Trash2,
   Download,
   Bot,
   BarChart3
@@ -143,17 +142,6 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               <BarChart3 className="h-4 w-4" />
             </Button>
           </Link>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => {
-              // TODO: Clear chat with confirmation
-              console.log("Clear chat");
-            }}
-            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-smooth"
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
           <Button
             variant="ghost"
             size="icon"
