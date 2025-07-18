@@ -3,7 +3,7 @@ import { User } from "lucide-react";
 import ProductCard from "./ProductCard";
 import InteractiveButtons from "./InteractiveButtons";
 import type { ChatMessage } from "@shared/schema";
-import partSelectLogo from "@assets/image_1752870152809.png";
+import partSelectLogo from "@assets/image_1752872557573.png";
 
 interface MessageBubbleProps {
   message: ChatMessage;
@@ -82,7 +82,7 @@ export default function MessageBubble({ message, onQuickAction }: MessageBubbleP
           <img 
             src={partSelectLogo} 
             alt="PartSelect AI Assistant" 
-            className="w-full h-full object-contain p-0.5"
+            className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
           />
         </div>
       )}

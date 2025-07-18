@@ -121,14 +121,18 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             </Button>
           )}
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-partselect-blue to-partselect-dark rounded-full flex items-center justify-center shadow-custom-md">
-              <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-custom-md overflow-hidden">
+              <img 
+                src="/attached_assets/image_1752872557573.png" 
+                alt="PartSelect" 
+                className="w-6 h-6 sm:w-10 sm:h-10 object-contain"
+              />
             </div>
             <div>
               <h1 className="text-sm sm:text-xl font-semibold text-text-dark">PartSelect AI Assistant</h1>
               <div className="flex items-center space-x-2 hidden sm:flex">
                 <div className="w-2 h-2 bg-success-green rounded-full animate-pulse"></div>
-                <p className="text-sm text-gray-600 font-medium">Online • Your ultimate DIY repair partner since 1999</p>
+                <p className="text-sm text-gray-600 font-medium">Online • Here to help since 1999</p>
               </div>
             </div>
           </div>
@@ -206,8 +210,12 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
       <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-6">
         {messages.length === 0 && (
           <div className="flex items-start space-x-2 sm:space-x-4">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-partselect-blue to-partselect-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
-              <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md overflow-hidden">
+              <img 
+                src="/attached_assets/image_1752872557573.png" 
+                alt="PartSelect" 
+                className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+              />
             </div>
             <div className="flex-1">
               <div className="bg-white rounded-2xl rounded-tl-sm p-4 sm:p-6 shadow-custom-md border border-border-light max-w-[280px] sm:max-w-lg">
