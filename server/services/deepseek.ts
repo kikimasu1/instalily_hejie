@@ -124,12 +124,153 @@ export class DeepseekService {
   }
 
   async processUserMessage(userMessage: string, conversationHistory: DeepseekMessage[] = []): Promise<string> {
+    // Check for order support requests and provide dummy placeholder responses
+    if (this.isOrderSupportRequest(userMessage)) {
+      return this.generateOrderSupportResponse(userMessage);
+    }
+
     const messages: DeepseekMessage[] = [
       ...conversationHistory.slice(-6), // Keep last 6 messages for context
       { role: 'user', content: userMessage }
     ];
 
     return await this.generateResponse(messages);
+  }
+
+  private isOrderSupportRequest(message: string): boolean {
+    const orderKeywords = [
+      'order support', 'track order', 'order status', 'track my order',
+      'return', 'exchange', 'refund', 'shipping', 'delivery',
+      'installation help', 'warranty', 'receipt'
+    ];
+    
+    return orderKeywords.some(keyword => 
+      message.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
+
+  private generateOrderSupportResponse(message: string): string {
+    const lowerMessage = message.toLowerCase();
+
+    if (lowerMessage.includes('track') && (lowerMessage.includes('order') || lowerMessage.includes('shipping'))) {
+      return `**Order Tracking Support** 📦
+
+I can help you track your order! Here's what I need:
+
+• **Order Number** (format: PS-XXXXXXXX)
+• **Email Address** used for the order
+
+**Sample Order Status:**
+Order #PS-12345678 - **In Transit**
+📍 Last Update: Package departed sorting facility
+🚚 Carrier: UPS Tracking #1Z999AA1234567890
+📅 Expected Delivery: Tomorrow by 8:00 PM
+
+**Common Tracking Issues:**
+• Orders ship within 1-2 business days
+• Tracking updates every 4-6 hours
+• Weekend deliveries available in most areas
+
+Would you like me to look up a specific order? Just provide your order number and email.`;
+    }
+
+    if (lowerMessage.includes('return') || lowerMessage.includes('exchange') || lowerMessage.includes('refund')) {
+      return `**Return & Exchange Support** 🔄
+
+I'm here to help with returns and exchanges! PartSelect offers hassle-free returns within **30 days** of purchase.
+
+**Return Process:**
+1. Provide your order number and reason for return
+2. We'll email you a prepaid return label
+3. Package the item in original condition
+4. Drop off at any UPS location
+
+**Return Reasons We Handle:**
+• Wrong part ordered
+• Part doesn't fit your appliance
+• Damaged during shipping
+• Changed your mind
+
+**Exchange Information:**
+• Free exchanges for wrong parts
+• 5-7 day processing time
+• Refunds processed within 3-5 business days
+
+Ready to start a return? I'll need your **order number** and the **reason for return**.`;
+    }
+
+    if (lowerMessage.includes('shipping') || lowerMessage.includes('delivery')) {
+      return `**Shipping & Delivery Information** 🚚
+
+Here's everything about PartSelect shipping:
+
+**Shipping Options:**
+• **Standard Shipping**: 3-5 business days (FREE on orders $50+)
+• **Expedited Shipping**: 2-3 business days ($12.95)
+• **Next Day**: 1 business day ($24.95)
+
+**Delivery Areas:**
+✅ All 50 US states
+✅ Most orders ship same day if ordered by 2 PM EST
+✅ Weekend delivery available in major cities
+
+**Shipping Notifications:**
+• Order confirmation email immediately
+• Shipping confirmation with tracking within 24 hours
+• Delivery notifications and updates
+
+**Questions I Can Help With:**
+• Change delivery address (before shipment)
+• Delivery instructions and special requests
+• Missing package claims
+• Delivery time estimates
+
+What specific shipping question can I help you with?`;
+    }
+
+    if (lowerMessage.includes('installation') && lowerMessage.includes('help')) {
+      return `**Installation Support** 🔧
+
+Great! I'm here to help with your part installation. PartSelect provides comprehensive installation support for all purchased parts.
+
+**What I Can Provide:**
+• **Step-by-step installation guides** with photos
+• **Video tutorials** for complex installations
+• **Tool lists** and preparation requirements
+• **Safety tips** and precautions
+• **Troubleshooting** common installation issues
+
+**Popular Installation Guides:**
+• Refrigerator water filters (5 minutes)
+• Dishwasher racks and accessories (10 minutes)
+• Door seals and gaskets (20-30 minutes)
+• Ice maker components (45 minutes)
+
+**Professional Installation:**
+For complex repairs, we can connect you with certified technicians in your area.
+
+**What part did you purchase that needs installation?** I'll provide the specific guide and any tips for your appliance model.`;
+    }
+
+    // Default order support response
+    return `**PartSelect Order Support** 💙
+
+I'm here to help with all your order needs! I can assist with:
+
+🔍 **Order Tracking** - Real-time status updates
+🔄 **Returns & Exchanges** - Hassle-free process
+🚚 **Shipping Questions** - Delivery options and timing
+🔧 **Installation Support** - Step-by-step guidance
+📋 **Warranty Information** - Coverage details
+📧 **Account Issues** - Order history and receipts
+
+**Quick Help Options:**
+• "Track my order" - Get shipping status
+• "Return an item" - Start return process  
+• "Installation help" - Get setup guidance
+• "Shipping options" - See delivery choices
+
+What can I help you with today? Just let me know your specific need and I'll provide detailed assistance!`;
   }
 }
 
