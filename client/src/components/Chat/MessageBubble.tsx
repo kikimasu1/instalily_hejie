@@ -22,7 +22,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
         <div
           className={`rounded-2xl p-3 sm:p-5 max-w-[280px] sm:max-w-lg transition-smooth ${
             message.isUser
-              ? 'bg-gradient-to-br from-partselect-blue to-partselect-dark text-white rounded-tr-sm shadow-custom-md'
+              ? 'bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-tr-sm shadow-custom-md'
               : 'bg-white border border-border-light rounded-tl-sm shadow-custom-md hover:shadow-custom-lg'
           }`}
         >
