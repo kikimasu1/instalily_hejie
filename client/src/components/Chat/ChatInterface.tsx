@@ -5,18 +5,18 @@ import { useChat } from "@/hooks/useChat";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 import ChatDownloadModal from "./ChatDownloadModal";
-import { 
-  ShoppingCart, 
-  Search, 
-  Wrench, 
-  Bolt, 
-  CheckCircle, 
-  Send, 
-  Paperclip, 
+import {
+  ShoppingCart,
+  Search,
+  Wrench,
+  Bolt,
+  CheckCircle,
+  Send,
+  Paperclip,
   Camera,
   Download,
   Bot,
-  BarChart3
+  BarChart3,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -26,7 +26,11 @@ interface ChatInterfaceProps {
   isMobile: boolean;
 }
 
-export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: ChatInterfaceProps) {
+export default function ChatInterface({
+  sessionId,
+  onToggleSidebar,
+  isMobile,
+}: ChatInterfaceProps) {
   const [message, setMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [showDownloadModal, setShowDownloadModal] = useState(false);
@@ -49,7 +53,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
 
     const messageToSend = message.trim();
     setMessage("");
-    
+
     // Reset textarea height
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -67,7 +71,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-    
+
     // Auto-resize textarea
     const textarea = e.target;
     textarea.style.height = "auto";
@@ -81,12 +85,14 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
 
   const handleQuickAction = (action: string) => {
     const actionMessages = {
-      'find-parts': 'I need help finding parts for my appliance',
-      'installation-help': 'I need installation instructions for a part',
-      'troubleshooting': 'I\'m having issues with my appliance and need troubleshooting help',
-      'check-compatibility': 'I need to check if a part is compatible with my appliance'
+      "find-parts": "I need help finding parts for my appliance",
+      "installation-help": "I need installation instructions for a part",
+      troubleshooting:
+        "I'm having issues with my appliance and need troubleshooting help",
+      "check-compatibility":
+        "I need to check if a part is compatible with my appliance",
     };
-    
+
     const actionMessage = actionMessages[action as keyof typeof actionMessages];
     if (actionMessage) {
       insertSampleQuery(actionMessage);
@@ -122,17 +128,21 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           )}
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="w-8 h-8 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-custom-md overflow-hidden">
-              <img 
-                src="/avatar.jpg" 
-                alt="PartSelect" 
-                className="w-6 h-6 sm:w-10 sm:h-10 object-contain"
+              <img
+                src="https://i.ibb.co/HDDX9wDq/Wechat-IMG140.png"
+                alt="PartSelect"
+                className="w-6 h-6 sm:w-10 sm:h-10 object-cover"
               />
             </div>
             <div>
-              <h1 className="text-sm sm:text-xl font-semibold text-text-dark">PartSelect AI Assistant</h1>
+              <h1 className="text-sm sm:text-xl font-semibold text-text-dark">
+                PartSelect AI Assistant
+              </h1>
               <div className="flex items-center space-x-2 hidden sm:flex">
                 <div className="w-2 h-2 bg-success-green rounded-full animate-pulse"></div>
-                <p className="text-sm text-gray-600 font-medium">Online • Here to help since 1999</p>
+                <p className="text-sm text-gray-600 font-medium">
+                  Online • Here to help since 1999
+                </p>
               </div>
             </div>
           </div>
@@ -166,7 +176,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="outline"
             size="sm"
-            onClick={() => handleQuickAction('find-parts')}
+            onClick={() => handleQuickAction("find-parts")}
             className="bg-gradient-to-r from-blue-50 to-blue-100 text-partselect-blue border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -176,7 +186,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="outline"
             size="sm"
-            onClick={() => handleQuickAction('installation-help')}
+            onClick={() => handleQuickAction("installation-help")}
             className="bg-gradient-to-r from-green-50 to-green-100 text-success-green border-green-200 hover:from-green-100 hover:to-green-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Bolt className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -186,7 +196,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="outline"
             size="sm"
-            onClick={() => handleQuickAction('troubleshooting')}
+            onClick={() => handleQuickAction("troubleshooting")}
             className="bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 border-orange-200 hover:from-orange-100 hover:to-orange-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Wrench className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -196,7 +206,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="outline"
             size="sm"
-            onClick={() => handleQuickAction('check-compatibility')}
+            onClick={() => handleQuickAction("check-compatibility")}
             className="bg-gradient-to-r from-purple-50 to-purple-100 text-purple-600 border-purple-200 hover:from-purple-100 hover:to-purple-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -211,26 +221,36 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
         {messages.length === 0 && (
           <div className="flex items-start space-x-2 sm:space-x-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md overflow-hidden">
-              <img 
-                src="/avatar.jpg" 
-                alt="PartSelect" 
-                className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+              <img
+                src="https://i.ibb.co/HDDX9wDq/Wechat-IMG140.png"
+                alt="PartSelect"
+                className="w-6 h-6 sm:w-8 sm:h-8 object-cover"
               />
             </div>
             <div className="flex-1">
               <div className="bg-white rounded-2xl rounded-tl-sm p-4 sm:p-6 shadow-custom-md border border-border-light max-w-[280px] sm:max-w-lg">
-                <p className="text-gray-900 font-medium text-sm sm:text-base leading-relaxed">Welcome to PartSelect! Since 1999, we've been empowering DIY repairs with genuine parts and expert guidance. I'm here to help you find the right parts, provide installation know-how, and guide you through every stage of your repair.</p>
-                <p className="text-gray-900 font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">Whether it's refrigerators, dishwashers, or other appliances - let's fix it right the first time!</p>
+                <p className="text-gray-900 font-medium text-sm sm:text-base leading-relaxed">
+                  Welcome to PartSelect! Since 1999, we've been empowering DIY
+                  repairs with genuine parts and expert guidance. I'm here to
+                  help you find the right parts, provide installation know-how,
+                  and guide you through every stage of your repair.
+                </p>
+                <p className="text-gray-900 font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">
+                  Whether it's refrigerators, dishwashers, or other appliances -
+                  let's fix it right the first time!
+                </p>
               </div>
-              <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-medium">Just now</p>
+              <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-medium">
+                Just now
+              </p>
             </div>
           </div>
         )}
 
         {messages.map((msg, index) => (
-          <MessageBubble 
-            key={index} 
-            message={msg} 
+          <MessageBubble
+            key={index}
+            message={msg}
             onQuickAction={(action) => {
               setMessage(action);
               // Auto-submit the selected action
@@ -301,7 +321,11 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => insertSampleQuery("I need a door seal for my Whirlpool dishwasher model WDT780SAEM1")}
+            onClick={() =>
+              insertSampleQuery(
+                "I need a door seal for my Whirlpool dishwasher model WDT780SAEM1",
+              )
+            }
             className="px-3 sm:px-4 py-2 bg-gray-50 text-gray-700 rounded-full text-xs sm:text-sm hover:bg-gray-100 transition-smooth border border-gray-200 font-medium"
           >
             "I need a door seal for my dishwasher"
@@ -309,7 +333,11 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => insertSampleQuery("My ice maker isn't working, what could be wrong?")}
+            onClick={() =>
+              insertSampleQuery(
+                "My ice maker isn't working, what could be wrong?",
+              )
+            }
             className="px-3 sm:px-4 py-2 bg-gray-50 text-gray-700 rounded-full text-xs sm:text-sm hover:bg-gray-100 transition-smooth border border-gray-200 font-medium"
           >
             "My ice maker isn't working"
@@ -317,7 +345,11 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => insertSampleQuery("Is part PS11770274 compatible with my WRS325SDHZ?")}
+            onClick={() =>
+              insertSampleQuery(
+                "Is part PS11770274 compatible with my WRS325SDHZ?",
+              )
+            }
             className="px-3 sm:px-4 py-2 bg-gray-50 text-gray-700 rounded-full text-xs sm:text-sm hover:bg-gray-100 transition-smooth border border-gray-200 font-medium"
           >
             "Check part compatibility"

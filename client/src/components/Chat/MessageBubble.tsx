@@ -80,9 +80,9 @@ export default function MessageBubble({ message, onQuickAction }: MessageBubbleP
       {!message.isUser && (
         <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md overflow-hidden">
           <img 
-            src="/avatar.jpg" 
+            src="https://i.ibb.co/HDDX9wDq/Wechat-IMG140.png" 
             alt="PartSelect AI Assistant" 
-            className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+            className="w-6 h-6 sm:w-8 sm:h-8 object-cover"
           />
         </div>
       )}
