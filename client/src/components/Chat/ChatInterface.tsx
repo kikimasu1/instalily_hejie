@@ -123,7 +123,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="w-8 h-8 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-custom-md overflow-hidden">
               <img 
-                src="/attached_assets/image_1752872557573.png" 
+                src="/avatar.jpg" 
                 alt="PartSelect" 
                 className="w-6 h-6 sm:w-10 sm:h-10 object-contain"
               />
@@ -212,7 +212,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <div className="flex items-start space-x-2 sm:space-x-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md overflow-hidden">
               <img 
-                src="/attached_assets/image_1752872557573.png" 
+                src="/avatar.jpg" 
                 alt="PartSelect" 
                 className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
               />

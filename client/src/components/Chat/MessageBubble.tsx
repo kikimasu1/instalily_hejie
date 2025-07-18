@@ -3,7 +3,7 @@ import { User } from "lucide-react";
 import ProductCard from "./ProductCard";
 import InteractiveButtons from "./InteractiveButtons";
 import type { ChatMessage } from "@shared/schema";
-import partSelectLogo from "@assets/image_1752872557573.png";
+// Using direct path to avatar.jpg since it's in the root directory
 
 interface MessageBubbleProps {
   message: ChatMessage;
@@ -80,7 +80,7 @@ export default function MessageBubble({ message, onQuickAction }: MessageBubbleP
       {!message.isUser && (
         <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md overflow-hidden">
           <img 
-            src={partSelectLogo} 
+            src="/avatar.jpg" 
             alt="PartSelect AI Assistant" 
             className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
           />
