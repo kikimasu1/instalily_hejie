@@ -105,14 +105,17 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="bg-white border-b border-border-light p-3 sm:p-6 flex items-center justify-between shadow-custom-sm">
+      <div className="chat-header p-3 sm:p-6 flex items-center justify-between shadow-custom-sm" style={{
+        background: 'linear-gradient(135deg, #4A6B7C 0%, #5A7B8C 100%)',
+        borderBottom: '3px solid #E6B854'
+      }}>
         <div className="flex items-center space-x-2 sm:space-x-4">
           {isMobile && (
             <Button
               variant="ghost"
               size="icon"
               onClick={onToggleSidebar}
-              className="text-partselect-blue hover:bg-blue-50 transition-smooth"
+              className="text-white hover:bg-white hover:bg-opacity-20 transition-smooth"
             >
               <ShoppingCart className="h-5 w-5" />
             </Button>
@@ -122,10 +125,10 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-sm sm:text-xl font-semibold text-text-dark">PartSelect AI Assistant</h1>
+              <h1 className="chat-title text-sm sm:text-xl font-semibold" style={{ color: '#FFFFFF', fontWeight: 600 }}>PartSelect AI Assistant</h1>
               <div className="flex items-center space-x-2 hidden sm:flex">
-                <div className="w-2 h-2 bg-success-green rounded-full animate-pulse"></div>
-                <p className="text-sm text-gray-600 font-medium">Online • Refrigerator & Dishwasher Parts Expert</p>
+                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                <p className="chat-subtitle text-sm font-medium" style={{ color: '#E6B854', opacity: 0.9 }}>Online • Refrigerator & Dishwasher Parts Expert</p>
               </div>
             </div>
           </div>
@@ -138,7 +141,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               // TODO: Clear chat with confirmation
               console.log("Clear chat");
             }}
-            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-smooth"
+            className="text-white hover:bg-white hover:bg-opacity-20 transition-smooth"
           >
             <Trash2 className="h-4 w-4" />
           </Button>
@@ -149,7 +152,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               // TODO: Download chat history
               console.log("Download history");
             }}
-            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-smooth"
+            className="text-white hover:bg-white hover:bg-opacity-20 transition-smooth"
           >
             <Download className="h-4 w-4" />
           </Button>
