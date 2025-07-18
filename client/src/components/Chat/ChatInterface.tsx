@@ -17,7 +17,7 @@ import {
   Download,
   Bot,
   BarChart3,
-  ShoppingBag,
+
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -215,16 +215,7 @@ export default function ChatInterface({
             <span className="sm:hidden">Compatibility</span>
           </Button>
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleQuickAction("order-support")}
-            className="bg-gradient-to-r from-pink-50 to-pink-100 text-pink-600 border-pink-200 hover:from-pink-100 hover:to-pink-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
-          >
-            <ShoppingBag className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-            <span className="hidden sm:inline">Order Support</span>
-            <span className="sm:hidden">Orders</span>
-          </Button>
+
         </div>
       </div>
 
