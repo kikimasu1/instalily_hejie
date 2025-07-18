@@ -16,8 +16,10 @@ import {
   Tablet,
   BarChart3,
   PieChart,
-  Activity
+  Activity,
+  ArrowLeft
 } from "lucide-react";
+import { Link } from "wouter";
 
 interface AnalyticsDashboardProps {
   sessionId?: string;
@@ -48,9 +50,21 @@ export default function AnalyticsDashboard({ sessionId }: AnalyticsDashboardProp
   return (
     <div className="p-4 sm:p-6 space-y-6 bg-background-gradient min-h-screen">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-text-dark">Analytics Dashboard</h1>
-          <p className="text-gray-600 mt-1">Conversation insights and system performance</p>
+        <div className="flex items-center space-x-4">
+          <Link href="/">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-gray-600 hover:text-partselect-blue hover:bg-blue-50 transition-smooth"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Chat
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-text-dark">Analytics Dashboard</h1>
+            <p className="text-gray-600 mt-1">Conversation insights and system performance</p>
+          </div>
         </div>
         <Badge variant="secondary" className="bg-partselect-blue text-white">
           Live Data
