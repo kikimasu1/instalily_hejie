@@ -128,7 +128,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               <h1 className="text-sm sm:text-xl font-semibold text-text-dark">PartSelect AI Assistant</h1>
               <div className="flex items-center space-x-2 hidden sm:flex">
                 <div className="w-2 h-2 bg-success-green rounded-full animate-pulse"></div>
-                <p className="text-sm text-gray-600 font-medium">Online • Refrigerator & Dishwasher Parts Expert</p>
+                <p className="text-sm text-gray-600 font-medium">Online • Your ultimate DIY repair partner since 1999</p>
               </div>
             </div>
           </div>
@@ -211,8 +211,8 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             </div>
             <div className="flex-1">
               <div className="bg-white rounded-2xl rounded-tl-sm p-4 sm:p-6 shadow-custom-md border border-border-light max-w-[280px] sm:max-w-lg">
-                <p className="text-gray-900 font-medium text-sm sm:text-base leading-relaxed">Hi! I'm your PartSelect AI assistant. I can help you find refrigerator and dishwasher parts, check compatibility, provide installation guidance, and troubleshoot appliance issues.</p>
-                <p className="text-gray-900 font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">What can I help you with today?</p>
+                <p className="text-gray-900 font-medium text-sm sm:text-base leading-relaxed">Welcome to PartSelect! Since 1999, we've been empowering DIY repairs with genuine parts and expert guidance. I'm here to help you find the right parts, provide installation know-how, and guide you through every stage of your repair.</p>
+                <p className="text-gray-900 font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">Whether it's refrigerators, dishwashers, or other appliances - let's fix it right the first time!</p>
               </div>
               <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-medium">Just now</p>
             </div>

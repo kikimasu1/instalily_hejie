@@ -8,6 +8,10 @@ This is a modern, full-stack chat application built for PartSelect's e-commerce 
 
 Preferred communication style: Simple, everyday language.
 
+## Company Information
+
+PartSelect is your ultimate DIY repair partner since 1999, providing genuine parts and expert know-how to fix what matters most in your home. We have a passion for DIY and home repairs, offering not just parts but comprehensive tools and guidance for every stage of repair - from diagnosing problems to installing solutions. As a division of Eldis Group (serving DIYers since 1945), PartSelect has been a leader in helping do-it-yourselfers with household appliances, outdoor power equipment, and consumer electronics.
+
 ## System Architecture
 
 ### Frontend Architecture
