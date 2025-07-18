@@ -12,7 +12,7 @@ export interface DeepseekMessage {
   content: string;
 }
 
-const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || process.env.DEEPSEEK_API_KEY_ENV_VAR || "default_key";
+const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
 const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions";
 
 const SYSTEM_PROMPT = `You are a helpful PartSelect customer service agent specializing in refrigerator and dishwasher parts. 
@@ -44,10 +44,25 @@ export class DeepseekService {
   constructor() {
     this.apiKey = DEEPSEEK_API_KEY;
     this.apiUrl = DEEPSEEK_API_URL;
+    
+    // Debug logging
+    console.log('Deepseek API Key exists:', !!this.apiKey);
+    console.log('Deepseek API Key length:', this.apiKey?.length || 0);
+    
+    if (!this.apiKey) {
+      console.error('DEEPSEEK_API_KEY environment variable is not set!');
+    }
   }
 
   async generateResponse(messages: DeepseekMessage[]): Promise<string> {
     try {
+      // Check if API key is available
+      if (!this.apiKey) {
+        throw new Error('DEEPSEEK_API_KEY is not configured');
+      }
+
+      console.log('Making request to Deepseek API...');
+      
       const response = await fetch(this.apiUrl, {
         method: 'POST',
         headers: {
@@ -65,7 +80,11 @@ export class DeepseekService {
         }),
       });
 
+      console.log('Deepseek API response status:', response.status);
+
       if (!response.ok) {
+        const errorBody = await response.text();
+        console.error('Deepseek API error body:', errorBody);
         throw new Error(`Deepseek API error: ${response.status} ${response.statusText}`);
       }
 
@@ -75,6 +94,7 @@ export class DeepseekService {
         throw new Error('No response from Deepseek API');
       }
 
+      console.log('Deepseek API response received successfully');
       return data.choices[0].message.content;
     } catch (error) {
       console.error('Error calling Deepseek API:', error);
