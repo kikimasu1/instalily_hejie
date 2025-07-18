@@ -11,6 +11,22 @@ interface MessageBubbleProps {
 export default function MessageBubble({ message }: MessageBubbleProps) {
   const timeAgo = formatDistanceToNow(new Date(message.timestamp), { addSuffix: true });
 
+  // Function to parse markdown bold formatting
+  const parseTextWithBold = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        const boldText = part.slice(2, -2);
+        return (
+          <strong key={index} className="font-bold">
+            {boldText}
+          </strong>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <div className={`flex items-start space-x-2 sm:space-x-4 ${message.isUser ? 'justify-end' : ''}`}>
       {!message.isUser && (
@@ -34,7 +50,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           <div className={`text-sm sm:text-base leading-relaxed font-medium ${message.isUser ? 'text-white' : 'text-gray-900'}`}>
             {message.content.split('\n').map((line, i) => (
               <p key={i} className={i > 0 ? 'mt-2 sm:mt-3' : ''}>
-                {line}
+                {parseTextWithBold(line)}
               </p>
             ))}
           </div>
