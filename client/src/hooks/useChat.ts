@@ -21,11 +21,18 @@ export function useChat(sessionId: string) {
 
   // Send message mutation
   const sendMessageMutation = useMutation({
-    mutationFn: async (message: string) => {
-      const response = await apiRequest("POST", "/api/chat", {
+    mutationFn: async ({ message, imageData }: { message: string, imageData?: {dataUrl: string, name: string} }) => {
+      const requestBody: any = {
         message,
         sessionId,
-      });
+      };
+      
+      if (imageData) {
+        requestBody.imageUrl = imageData.dataUrl;
+        requestBody.imageName = imageData.name;
+      }
+      
+      const response = await apiRequest("POST", "/api/chat", requestBody);
       return response.json();
     },
     onSuccess: () => {
@@ -87,17 +94,22 @@ export function useChat(sessionId: string) {
     }
   }, [chatData]);
 
-  const sendMessage = async (message: string) => {
-    // Send via WebSocket for real-time experience
-    if (wsRef.current?.readyState === WebSocket.OPEN) {
-      wsRef.current.send(JSON.stringify({
-        type: "message",
-        content: message,
-        sessionId,
-      }));
+  const sendMessage = async (message: string, imageData?: {dataUrl: string, name: string}) => {
+    // Always use HTTP API for image uploads, use WebSocket for text-only messages
+    if (imageData) {
+      await sendMessageMutation.mutateAsync({ message, imageData });
     } else {
-      // Fallback to HTTP API
-      await sendMessageMutation.mutateAsync(message);
+      // Send via WebSocket for real-time experience
+      if (wsRef.current?.readyState === WebSocket.OPEN) {
+        wsRef.current.send(JSON.stringify({
+          type: "message",
+          content: message,
+          sessionId,
+        }));
+      } else {
+        // Fallback to HTTP API
+        await sendMessageMutation.mutateAsync({ message });
+      }
     }
   };
 

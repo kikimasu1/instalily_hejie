@@ -141,7 +141,9 @@ export class MemStorage implements IStorage {
       ...insertMessage, 
       id, 
       timestamp: new Date(),
-      productCards: insertMessage.productCards ?? null
+      productCards: insertMessage.productCards ?? null,
+      imageUrl: insertMessage.imageUrl ?? undefined,
+      imageName: insertMessage.imageName ?? undefined
     };
     
     const sessionMessages = this.chatMessages.get(insertMessage.sessionId) || [];

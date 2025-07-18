@@ -17,6 +17,7 @@ import {
   Download,
   Bot,
   BarChart3,
+  X,
 
 } from "lucide-react";
 import { Link } from "wouter";
@@ -50,9 +51,9 @@ export default function ChatInterface({
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (!message.trim() || isLoading) return;
+    if ((!message.trim() && !uploadedImage) || isLoading) return;
 
-    const messageToSend = message.trim();
+    const messageToSend = message.trim() || `📷 Uploaded image: ${uploadedImage?.name}`;
     setMessage("");
 
     // Reset textarea height
@@ -60,7 +61,10 @@ export default function ChatInterface({
       textareaRef.current.style.height = "auto";
     }
 
-    await sendMessage(messageToSend);
+    await sendMessage(messageToSend, uploadedImage);
+    
+    // Clear uploaded image after sending
+    setUploadedImage(null);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -104,11 +108,43 @@ export default function ChatInterface({
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [uploadedImage, setUploadedImage] = useState<{dataUrl: string, name: string} | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // TODO: Implement file upload functionality
       console.log("File selected:", file.name);
+      
+      // Check if it's an image
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file.');
+        return;
+      }
+      
+      // Check file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size must be less than 5MB.');
+        return;
+      }
+      
+      try {
+        // Convert image to data URL for display
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const imageDataUrl = event.target?.result as string;
+          setUploadedImage({
+            dataUrl: imageDataUrl,
+            name: file.name
+          });
+          // Focus on the input to allow user to add text
+          inputRef.current?.focus();
+        };
+        
+        reader.readAsDataURL(file);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('Failed to upload image. Please try again.');
+      }
     }
   };
 
@@ -271,6 +307,31 @@ export default function ChatInterface({
 
       {/* Input Area */}
       <div className="bg-white border-t border-border-light p-3 sm:p-6 shadow-custom-sm safe-area-bottom">
+        {/* Image Preview */}
+        {uploadedImage && (
+          <div className="mb-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-start space-x-3">
+              <img 
+                src={uploadedImage.dataUrl} 
+                alt={uploadedImage.name} 
+                className="w-16 h-16 object-cover rounded-lg border border-gray-300"
+              />
+              <div className="flex-1">
+                <p className="text-sm font-medium text-gray-700">📷 {uploadedImage.name}</p>
+                <p className="text-xs text-gray-500 mt-1">Ready to send with your message</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setUploadedImage(null)}
+                className="h-6 w-6 text-gray-400 hover:text-gray-600"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+
         <div className="flex items-end space-x-2 sm:space-x-4 w-full">
           <div className="flex-1 min-w-0">
             <div className="relative">
@@ -312,7 +373,7 @@ export default function ChatInterface({
           </div>
           <Button
             onClick={handleSendMessage}
-            disabled={!message.trim() || isLoading}
+            disabled={(!message.trim() && !uploadedImage) || isLoading}
             className="flex-shrink-0 bg-gradient-to-r from-partselect-blue to-partselect-dark hover:from-partselect-dark hover:to-partselect-blue text-white px-3 py-2 sm:px-6 sm:py-3 rounded-xl transition-smooth shadow-custom-md hover-lift font-medium"
           >
             <Send className="h-4 w-4 sm:h-5 sm:w-5" />

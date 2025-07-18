@@ -23,18 +23,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Chat endpoints
   app.post("/api/chat", async (req, res) => {
     try {
-      const { message, sessionId } = req.body;
+      const { message, sessionId, imageUrl, imageName } = req.body;
       
       if (!message || !sessionId) {
         return res.status(400).json({ error: "Message and sessionId required" });
       }
 
-      // Save user message
+      // Save user message (with optional image)
       await storage.createChatMessage({
         sessionId,
         content: message,
         isUser: true,
-        productCards: []
+        productCards: [],
+        imageUrl: imageUrl || undefined,
+        imageName: imageName || undefined
       });
 
       // Get conversation history for context

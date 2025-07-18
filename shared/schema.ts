@@ -29,6 +29,8 @@ export const chatMessages = pgTable("chat_messages", {
   isUser: boolean("is_user").notNull(),
   timestamp: timestamp("timestamp").notNull().defaultNow(),
   productCards: text("product_cards").array(),
+  imageUrl: text("image_url"),
+  imageName: text("image_name"),
 });
 
 export const cartItems = pgTable("cart_items", {
@@ -71,6 +73,17 @@ export const insertChatMessageSchema = createInsertSchema(chatMessages).omit({
   id: true,
   timestamp: true,
 });
+
+export interface ChatMessage {
+  id: number;
+  sessionId: string;
+  content: string;
+  isUser: boolean;
+  timestamp: Date;
+  productCards?: string[];
+  imageUrl?: string;
+  imageName?: string;
+}
 
 export const insertCartItemSchema = createInsertSchema(cartItems).omit({
   id: true,

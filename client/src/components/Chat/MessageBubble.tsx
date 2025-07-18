@@ -113,6 +113,23 @@ export default function MessageBubble({ message, onQuickAction }: MessageBubbleP
               : 'bg-white border border-border-light rounded-tl-sm shadow-custom-md hover:shadow-custom-lg'
           }`}
         >
+          {/* Display uploaded image if present */}
+          {message.imageUrl && (
+            <div className="mb-3">
+              <img 
+                src={message.imageUrl} 
+                alt={message.imageName || 'Uploaded image'} 
+                className="max-w-full h-auto rounded-lg shadow-sm border border-gray-200"
+                style={{ maxHeight: '200px' }}
+              />
+              {message.imageName && (
+                <p className={`text-xs mt-1 ${message.isUser ? 'text-blue-100' : 'text-gray-500'}`}>
+                  📷 {message.imageName}
+                </p>
+              )}
+            </div>
+          )}
+          
           <div className={`text-sm sm:text-base leading-relaxed font-medium ${message.isUser ? 'text-white' : 'text-gray-900'}`}>
             {message.content.split('\n').map((line, i) => (
               <p key={i} className={i > 0 ? 'mt-2 sm:mt-3' : ''}>
