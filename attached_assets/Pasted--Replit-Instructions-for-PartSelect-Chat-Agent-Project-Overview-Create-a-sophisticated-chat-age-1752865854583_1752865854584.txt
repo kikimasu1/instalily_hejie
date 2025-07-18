@@ -1,0 +1,218 @@
+# Replit Instructions for PartSelect Chat Agent
+
+## Project Overview
+Create a sophisticated chat agent for PartSelect e-commerce website specializing in refrigerator and dishwasher parts. The agent should provide product information, installation guidance, troubleshooting help, and compatibility checks using an agentic architecture with Deepseek integration.
+
+## Tech Stack Requirements
+
+### Frontend
+- **Framework**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with custom PartSelect color scheme
+- **Icons**: Lucide React
+- **HTTP Client**: Axios for API calls
+- **State Management**: React Hooks (useState, useReducer)
+
+### Backend
+- **Runtime**: Node.js with Express
+- **Language**: TypeScript
+- **AI Integration**: Deepseek API (REQUIRED)
+- **Real-time**: Socket.io for live chat
+- **Middleware**: CORS, Express JSON parser
+
+## Project Structure
+```
+partselect-chatbot/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ChatInterface.tsx
+│   │   │   ├── MessageBubble.tsx
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── InputArea.tsx
+│   │   │   └── TypingIndicator.tsx
+│   │   ├── services/
+│   │   │   ├── api.ts
+│   │   │   └── websocket.ts
+│   │   ├── types/
+│   │   │   └── index.ts
+│   │   ├── utils/
+│   │   │   └── helpers.ts
+│   │   └── App.tsx
+│   ├── tailwind.config.js
+│   └── package.json
+├── backend/
+│   ├── src/
+│   │   ├── routes/
+│   │   │   └── chat.ts
+│   │   ├── services/
+│   │   │   ├── deepseekService.ts
+│   │   │   ├── productService.ts
+│   │   │   └── intentClassifier.ts
+│   │   ├── models/
+│   │   │   └── types.ts
+│   │   ├── utils/
+│   │   │   └── validation.ts
+│   │   └── server.ts
+│   ├── .env
+│   └── package.json
+└── README.md
+```
+
+## Color Scheme (PartSelect Brand)
+```javascript
+// Tailwind CSS configuration
+const colors = {
+  'ps-primary': '#4A6B7C',        // Main teal-blue from navigation
+  'ps-primary-dark': '#3A5A6B',   // Darker variant
+  'ps-primary-light': '#5A7B8C',  // Lighter variant
+  'ps-accent': '#E6B854',         // Golden yellow from "Find Your Part"
+  'ps-accent-light': '#F2C968',   // Light golden
+  'ps-accent-dark': '#D4A640',    // Dark golden
+  'ps-search': '#5A8A6B',         // Green from search button
+  'ps-white': '#FFFFFF',
+  'ps-light-gray': '#F8F9FA',
+  'ps-gray': '#E9ECEF',
+  'ps-dark-gray': '#6C757D',
+  'ps-text': '#212529'
+}
+```
+
+## Core Features to Implement
+
+### 1. Agentic Architecture
+- **Intent Classification**: Categorize user queries (installation, compatibility, troubleshooting, part lookup)
+- **Task Decomposition**: Break complex queries into subtasks
+- **Tool Orchestration**: Coordinate multiple tools/services
+- **Response Synthesis**: Combine results into coherent answers
+
+### 2. Required Tools/Services
+- **Product Search**: Find parts by number, description, or symptoms
+- **Compatibility Checker**: Verify part-appliance compatibility
+- **Installation Guide**: Provide step-by-step instructions
+- **Troubleshooting**: Diagnose common appliance problems
+- **Price Calculator**: Handle pricing and availability
+
+### 3. AI Integration Requirements
+- **Primary LLM**: Deepseek API (MANDATORY)
+- **Prompt Engineering**: Chain-of-thought reasoning
+- **Context Management**: Maintain conversation history
+- **Scope Limiting**: Only refrigerator and dishwasher parts
+
+### 4. User Interface Features
+- **Modern Chat UI**: WhatsApp/iMessage style interface
+- **Product Cards**: Rich display of parts with images, prices, specs
+- **Quick Actions**: Pre-defined buttons for common queries
+- **Typing Indicators**: Real-time feedback
+- **Error Handling**: Graceful fallbacks for failures
+
+## Sample Queries to Handle
+1. "How can I install part number PS11752778?"
+2. "Is this part compatible with my WDT780SAEM1 model?"
+3. "The ice maker on my Whirlpool fridge is not working. How can I fix it?"
+4. "Find water filter for Kenmore refrigerator model 795.51832.410"
+5. "What tools do I need to replace a dishwasher door seal?"
+
+## Implementation Instructions
+
+### Step 1: Environment Setup
+```bash
+# Create project structure
+npm create react-app frontend --template typescript
+mkdir backend
+cd backend && npm init -y
+
+# Install dependencies
+# Frontend: react, typescript, tailwindcss, lucide-react, axios, socket.io-client
+# Backend: express, typescript, ts-node, dotenv, socket.io, cors
+```
+
+### Step 2: Deepseek Integration
+```typescript
+// Must integrate Deepseek API with these capabilities:
+- Intent classification and routing
+- Conversational response generation
+- Tool calling and result synthesis
+- Chain-of-thought reasoning for complex queries
+```
+
+### Step 3: Mock Product Database
+```typescript
+// Create sample data for refrigerator and dishwasher parts
+interface Product {
+  id: string;
+  name: string;
+  partNumber: string;
+  description: string;
+  price: number;
+  image: string;
+  category: 'refrigerator' | 'dishwasher';
+  brand: string;
+  compatibility: string[];
+  inStock: boolean;
+  installationGuide?: string;
+}
+```
+
+### Step 4: Chat Interface
+- Header with PartSelect branding and online status
+- Scrollable message area with auto-scroll
+- Input area with send button and quick actions
+- Product cards embedded in chat flow
+- Responsive design for mobile and desktop
+
+### Step 5: Agentic Workflow
+```typescript
+// Implement ReAct pattern (Reasoning + Acting)
+const processQuery = async (query: string) => {
+  // 1. Intent Classification
+  const intent = await classifyIntent(query);
+  
+  // 2. Task Decomposition
+  const subtasks = await decomposeTask(query, intent);
+  
+  // 3. Tool Execution
+  const results = await executeTools(subtasks);
+  
+  // 4. Response Synthesis
+  const response = await synthesizeResponse(query, results);
+  
+  return response;
+}
+```
+
+## Quality Requirements
+- **Responsive Design**: Must work on mobile, tablet, and desktop
+- **Real-time Performance**: Sub-2 second response times
+- **Error Handling**: Graceful degradation for API failures
+- **Accessibility**: WCAG 2.1 AA compliance
+- **Brand Consistency**: Match PartSelect visual identity
+- **Scope Adherence**: Reject non-appliance queries politely
+
+## Evaluation Criteria
+- **Interface Design**: Professional, branded, intuitive
+- **Agentic Architecture**: Intelligent task decomposition and tool usage
+- **Accuracy**: Correct responses to appliance part queries
+- **Extensibility**: Easy to add new tools and capabilities
+- **Scalability**: Performance under load
+
+## Environment Variables
+```bash
+# Backend .env file
+DEEPSEEK_API_KEY=your_deepseek_api_key
+PORT=5000
+FRONTEND_URL=http://localhost:3000
+NODE_ENV=development
+```
+
+## Deployment Instructions
+- Frontend: Build for production and serve static files
+- Backend: Node.js server with PM2 for production
+- Environment: Ensure all API keys are securely configured
+- Testing: Include unit tests for core components
+
+## Additional Notes
+- Focus on user experience and visual polish
+- Implement comprehensive error boundaries
+- Use TypeScript strictly for type safety
+- Follow React best practices and hooks patterns
+- Ensure the solution is production-ready and scalable
