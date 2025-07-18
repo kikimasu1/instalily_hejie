@@ -13,8 +13,8 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
   return (
     <div className={`flex items-start space-x-2 sm:space-x-4 ${message.isUser ? 'justify-end' : ''}`}>
       {!message.isUser && (
-        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-ps-primary to-ps-primary-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
-          <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-ps-white" />
+        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-partselect-blue to-partselect-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
+          <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
         </div>
       )}
       
@@ -22,11 +22,11 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
         <div
           className={`rounded-2xl p-3 sm:p-5 max-w-[280px] sm:max-w-lg transition-smooth ${
             message.isUser
-              ? 'bg-gradient-to-br from-ps-primary to-ps-primary-dark text-ps-white rounded-tr-sm shadow-custom-md'
-              : 'bg-ps-white border border-ps-gray rounded-tl-sm shadow-custom-md hover:shadow-custom-lg'
+              ? 'bg-gradient-to-br from-blue-400 to-blue-500 text-white rounded-tr-sm shadow-custom-md'
+              : 'bg-white border border-border-light rounded-tl-sm shadow-custom-md hover:shadow-custom-lg'
           }`}
         >
-          <div className={`text-sm sm:text-base leading-relaxed font-medium ${message.isUser ? 'text-ps-white' : 'text-ps-text'}`}>
+          <div className={`text-sm sm:text-base leading-relaxed font-medium ${message.isUser ? 'text-white' : 'text-gray-900'}`}>
             {message.content.split('\n').map((line, i) => (
               <p key={i} className={i > 0 ? 'mt-2 sm:mt-3' : ''}>
                 {line}
@@ -44,14 +44,14 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           )}
         </div>
         
-        <p className={`text-xs text-ps-dark-gray mt-1 sm:mt-2 font-medium ${message.isUser ? 'text-right' : ''}`}>
+        <p className={`text-xs text-gray-500 mt-1 sm:mt-2 font-medium ${message.isUser ? 'text-right' : ''}`}>
           {timeAgo}
         </p>
       </div>
       
       {message.isUser && (
-        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-ps-accent to-ps-accent-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
-          <User className="h-4 w-4 sm:h-5 sm:w-5 text-ps-white" />
+        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
+          <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
         </div>
       )}
     </div>
