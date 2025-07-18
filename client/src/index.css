@@ -153,4 +153,16 @@
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  @media (max-width: 640px) {
+    .mobile-input-container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    }
+  }
 }

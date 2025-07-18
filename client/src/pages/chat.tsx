@@ -40,7 +40,7 @@ export default function ChatPage() {
 
   return (
     <div className="h-screen overflow-hidden bg-background-gradient">
-      <div className="flex h-full">
+      <div className="flex h-full w-full">
         {/* Desktop Sidebar - Only show when cart has items */}
         {!isMobile && cartData && cartData.items.length > 0 && (
           <div className="w-80 flex-shrink-0">

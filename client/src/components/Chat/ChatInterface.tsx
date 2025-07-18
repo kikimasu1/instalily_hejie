@@ -229,9 +229,9 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
       </div>
 
       {/* Input Area */}
-      <div className="bg-white border-t border-border-light p-3 sm:p-6 shadow-custom-sm">
-        <div className="flex items-end space-x-2 sm:space-x-4">
-          <div className="flex-1">
+      <div className="bg-white border-t border-border-light p-3 sm:p-6 shadow-custom-sm safe-area-bottom">
+        <div className="flex items-end space-x-2 sm:space-x-4 w-full">
+          <div className="flex-1 min-w-0">
             <div className="relative">
               <Textarea
                 ref={textareaRef}
@@ -239,7 +239,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
                 onChange={handleTextareaChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask about parts..."
-                className="pr-16 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
+                className="w-full pr-12 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
                 rows={1}
               />
               <div className="absolute right-2 sm:right-3 bottom-2 sm:bottom-3 flex items-center space-x-1">
@@ -272,7 +272,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             onClick={handleSendMessage}
             disabled={!message.trim() || isLoading}
-            className="bg-gradient-to-r from-partselect-blue to-partselect-dark hover:from-partselect-dark hover:to-partselect-blue text-white px-3 py-2 sm:px-6 sm:py-3 rounded-xl transition-smooth shadow-custom-md hover-lift font-medium"
+            className="flex-shrink-0 bg-gradient-to-r from-partselect-blue to-partselect-dark hover:from-partselect-dark hover:to-partselect-blue text-white px-3 py-2 sm:px-6 sm:py-3 rounded-xl transition-smooth shadow-custom-md hover-lift font-medium"
           >
             <Send className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
