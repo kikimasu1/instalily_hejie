@@ -136,7 +136,7 @@ export default function ChatDownloadModal({ isOpen, onClose, messages, sessionId
           <ScrollArea className="h-[300px] border rounded-lg p-4">
             <div className="space-y-4">
               {messages.map((message, index) => (
-                <div key={message.id} className="space-y-2">
+                <div key={`${message.id}-${index}`} className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge variant={message.sender === 'user' ? 'default' : 'secondary'}>
                       {message.sender === 'user' ? 'You' : 'PartSelect AI'}

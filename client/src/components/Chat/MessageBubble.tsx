@@ -1,14 +1,16 @@
 import { formatDistanceToNow } from "date-fns";
 import { User } from "lucide-react";
 import ProductCard from "./ProductCard";
+import InteractiveButtons from "./InteractiveButtons";
 import type { ChatMessage } from "@shared/schema";
 import partSelectLogo from "@assets/image_1752870152809.png";
 
 interface MessageBubbleProps {
   message: ChatMessage;
+  onQuickAction?: (action: string) => void;
 }
 
-export default function MessageBubble({ message }: MessageBubbleProps) {
+export default function MessageBubble({ message, onQuickAction }: MessageBubbleProps) {
   const timeAgo = formatDistanceToNow(new Date(message.timestamp), { addSuffix: true });
 
   // Function to parse markdown bold formatting
@@ -25,6 +27,52 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
       }
       return part;
     });
+  };
+
+  // Detect if message should have interactive buttons
+  const shouldShowInteractiveButtons = () => {
+    if (message.isUser) return false;
+    
+    const content = message.content.toLowerCase();
+    const hasQuestions = content.includes('what type of appliance') || 
+                        content.includes('model number') ||
+                        content.includes('specific part') ||
+                        content.includes('would you be able to provide');
+    
+    return hasQuestions;
+  };
+
+  // Generate interactive options based on message content
+  const getInteractiveOptions = () => {
+    const content = message.content.toLowerCase();
+    
+    if (content.includes('what type of appliance')) {
+      return [
+        { id: '1', text: 'Refrigerator', category: 'appliance', action: 'I have a refrigerator' },
+        { id: '2', text: 'Dishwasher', category: 'appliance', action: 'I have a dishwasher' }
+      ];
+    }
+    
+    if (content.includes('specific part')) {
+      return [
+        { id: '1', text: 'Water Filter', category: 'filter', action: 'I need a water filter' },
+        { id: '2', text: 'Door Seal', category: 'seal', action: 'I need a door seal' },
+        { id: '3', text: 'Ice Maker Parts', category: 'part', action: 'I need ice maker parts' },
+        { id: '4', text: 'Rack/Shelf', category: 'part', action: 'I need a rack or shelf' },
+        { id: '5', text: 'Motor/Pump', category: 'part', action: 'I need a motor or pump' },
+        { id: '6', text: 'Not Sure', category: 'repair', action: 'I\'m not sure what part I need' }
+      ];
+    }
+    
+    if (content.includes('model number')) {
+      return [
+        { id: '1', text: 'I have my model number', category: 'repair', action: 'I have my model number ready' },
+        { id: '2', text: 'Help me find it', category: 'repair', action: 'Help me find my model number' },
+        { id: '3', text: 'I don\'t have it', category: 'repair', action: 'I don\'t have my model number' }
+      ];
+    }
+    
+    return [];
   };
 
   return (
@@ -68,6 +116,18 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
         <p className={`text-xs text-gray-500 mt-1 sm:mt-2 font-medium ${message.isUser ? 'text-right' : ''}`}>
           {timeAgo}
         </p>
+
+        {/* Interactive Buttons for AI responses */}
+        {shouldShowInteractiveButtons() && onQuickAction && !message.isUser && (
+          <div className="mt-3">
+            <InteractiveButtons
+              options={getInteractiveOptions()}
+              onSelect={onQuickAction}
+              title="Quick Responses"
+              description="Choose an option to continue:"
+            />
+          </div>
+        )}
       </div>
       
       {message.isUser && (

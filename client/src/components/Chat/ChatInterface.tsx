@@ -220,7 +220,17 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
         )}
 
         {messages.map((msg, index) => (
-          <MessageBubble key={index} message={msg} />
+          <MessageBubble 
+            key={index} 
+            message={msg} 
+            onQuickAction={(action) => {
+              setMessage(action);
+              // Auto-submit the selected action
+              setTimeout(() => {
+                handleSendMessage();
+              }, 100);
+            }}
+          />
         ))}
 
         {isTyping && <TypingIndicator />}
