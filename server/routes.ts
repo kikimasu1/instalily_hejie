@@ -4,6 +4,7 @@ import { WebSocketServer, WebSocket } from "ws";
 import { storage } from "./storage";
 import { deepseekService } from "./services/deepseek";
 import { productSearchService } from "./services/productSearch";
+import { analyticsService } from "./services/analyticsService";
 import { initializeProductData } from "./data/products";
 import { 
   insertChatMessageSchema, 
@@ -177,6 +178,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Analytics endpoints
+  app.get("/api/analytics/system", async (req, res) => {
+    try {
+      const systemAnalytics = analyticsService.getSystemAnalytics();
+      res.json(systemAnalytics);
+    } catch (error) {
+      console.error('Error fetching system analytics:', error);
+      res.status(500).json({ error: 'Failed to fetch system analytics' });
+    }
+  });
+
+  app.get("/api/analytics/conversation/:sessionId", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      const conversationInsights = analyticsService.getConversationInsights(sessionId);
+      const messageAnalytics = analyticsService.getMessageAnalytics(sessionId);
+      
+      res.json({
+        conversation: conversationInsights,
+        messages: messageAnalytics
+      });
+    } catch (error) {
+      console.error('Error fetching conversation analytics:', error);
+      res.status(500).json({ error: 'Failed to fetch conversation analytics' });
+    }
+  });
+
+  app.get("/api/analytics/insights", async (req, res) => {
+    try {
+      const insights = analyticsService.generateInsightsSummary();
+      res.json(insights);
+    } catch (error) {
+      console.error('Error generating insights:', error);
+      res.status(500).json({ error: 'Failed to generate insights' });
+    }
+  });
+
+  app.get("/api/analytics/behavior", async (req, res) => {
+    try {
+      const { sessionId } = req.query;
+      const behaviorInsights = analyticsService.getUserBehaviorInsights(sessionId as string);
+      res.json(behaviorInsights);
+    } catch (error) {
+      console.error('Error fetching behavior insights:', error);
+      res.status(500).json({ error: 'Failed to fetch behavior insights' });
+    }
+  });
+
   // Cart endpoints
   app.get("/api/cart/:sessionId", async (req, res) => {
     try {
@@ -263,6 +312,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         if (data.type === 'join') {
           ws.sessionId = data.sessionId;
+          
+          // Initialize analytics tracking for this conversation
+          analyticsService.startConversation(data.sessionId);
+          
+          // Track user behavior (detect device type from user agent)
+          const userAgent = ws.protocol || '';
+          const deviceType = userAgent.includes('Mobile') ? 'mobile' : 
+                           userAgent.includes('Tablet') ? 'tablet' : 'desktop';
+          
+          analyticsService.trackUserBehavior(data.sessionId, {
+            deviceType,
+            browserInfo: userAgent
+          });
+          
           ws.send(JSON.stringify({
             type: 'joined',
             sessionId: data.sessionId
@@ -286,6 +349,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (data.type === 'message') {
           // Handle new chat message
           const { content, sessionId } = data;
+          
+          // Classify user intent and track analytics
+          const intent = analyticsService.classifyIntent(content);
+          analyticsService.trackMessage({
+            sessionId,
+            messageId: `user-${Date.now()}`,
+            type: 'user',
+            intent,
+            containsProductCards: false,
+            messageLength: content.length
+          });
           
           // Save user message
           await storage.createChatMessage({
@@ -336,6 +410,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // Generate AI response only if it appears to be a question or request
           if (isQuestion) {
             setTimeout(async () => {
+              const startTime = Date.now();
               try {
                 const history = await storage.getChatMessages(sessionId);
                 const conversationHistory: DeepseekMessage[] = history
@@ -346,6 +421,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   }));
 
                 const aiResponse = await deepseekService.processUserMessage(content, conversationHistory);
+                const responseTime = Date.now() - startTime;
+                
+                // Track AI response analytics
+                const containsProductCards = aiResponse.includes('part') || aiResponse.includes('product');
+                analyticsService.trackMessage({
+                  sessionId,
+                  messageId: `ai-${Date.now()}`,
+                  type: 'ai',
+                  intent: 'response',
+                  responseTime,
+                  containsProductCards,
+                  messageLength: aiResponse.length
+                });
                 
                 await storage.createChatMessage({
                   sessionId,
@@ -370,6 +458,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 });
               } catch (error) {
                 console.error('Error generating AI response:', error);
+                
+                // Track error in analytics
+                analyticsService.trackMessage({
+                  sessionId,
+                  messageId: `ai-error-${Date.now()}`,
+                  type: 'ai',
+                  intent: 'error',
+                  responseTime: Date.now() - startTime,
+                  containsProductCards: false,
+                  messageLength: 0
+                });
               }
             }, 1000); // Simulate typing delay
           }

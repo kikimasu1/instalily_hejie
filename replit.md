@@ -95,3 +95,27 @@ Preferred communication style: Simple, everyday language.
 - **Neon Database** serverless PostgreSQL for production
 
 The application is designed to be easily deployable with minimal configuration changes, supporting both development and production environments with appropriate build optimizations and database connections.
+
+## Latest Feature: Advanced Analytics System
+
+### Analytics Components
+- **AnalyticsService**: Comprehensive tracking of conversation metrics, user behavior, and system performance
+- **Analytics Dashboard**: Full-featured dashboard at `/analytics` with tabbed interface showing:
+  - System Overview: Sessions, messages, response times, user satisfaction
+  - Conversation Analytics: Session-specific metrics and intent tracking
+  - Behavioral Insights: User engagement levels and device distribution
+- **Analytics Widget**: Mini analytics display integrated into chat interface
+- **Real-time Tracking**: Live data collection with WebSocket integration
+
+### Key Metrics Tracked
+- **Conversation Metrics**: Message counts, duration, intent classification, product recommendations
+- **Performance Data**: AI response times, error rates, system availability
+- **User Behavior**: Device types, engagement levels, search patterns, bounce rates
+- **Intent Analysis**: Automatic categorization of user queries (installation, compatibility, troubleshooting, etc.)
+
+### Technical Implementation
+- Analytics service with in-memory storage and structured data models
+- RESTful API endpoints for analytics data retrieval
+- React hooks for data fetching with TanStack Query
+- Responsive dashboard with real-time updates every 30-60 seconds
+- Integration with existing chat system for seamless data collection

@@ -15,8 +15,10 @@ import {
   Camera,
   Trash2,
   Download,
-  Bot
+  Bot,
+  BarChart3
 } from "lucide-react";
+import { Link } from "wouter";
 
 interface ChatInterfaceProps {
   sessionId: string;
@@ -131,6 +133,16 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           </div>
         </div>
         <div className="flex items-center space-x-2">
+          <Link href="/analytics">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-500 hover:text-partselect-blue hover:bg-blue-50 transition-smooth"
+              title="View Analytics"
+            >
+              <BarChart3 className="h-4 w-4" />
+            </Button>
+          </Link>
           <Button
             variant="ghost"
             size="icon"
