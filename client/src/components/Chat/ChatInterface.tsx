@@ -4,6 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useChat } from "@/hooks/useChat";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
+import ChatDownloadModal from "./ChatDownloadModal";
 import { 
   ShoppingCart, 
   Search, 
@@ -28,6 +29,7 @@ interface ChatInterfaceProps {
 export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: ChatInterfaceProps) {
   const [message, setMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -145,11 +147,9 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => {
-              // TODO: Download chat history
-              console.log("Download history");
-            }}
+            onClick={() => setShowDownloadModal(true)}
             className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-smooth"
+            title="Download Chat History"
           >
             <Download className="h-4 w-4" />
           </Button>
@@ -306,6 +306,14 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
           </Button>
         </div>
       </div>
+
+      {/* Download Modal */}
+      <ChatDownloadModal
+        isOpen={showDownloadModal}
+        onClose={() => setShowDownloadModal(false)}
+        messages={messages}
+        sessionId={sessionId}
+      />
     </div>
   );
 }
