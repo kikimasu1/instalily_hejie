@@ -163,7 +163,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('find-parts')}
-            className="bg-ps-light-gray text-ps-primary border-ps-gray hover:bg-ps-accent hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-blue-50 to-blue-100 text-ps-primary border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Find Parts</span>
@@ -173,7 +173,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('installation-help')}
-            className="bg-ps-light-gray text-ps-search border-ps-gray hover:bg-ps-search hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-green-50 to-green-100 text-ps-search border-green-200 hover:from-green-100 hover:to-green-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Bolt className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Installation Help</span>
@@ -183,7 +183,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('troubleshooting')}
-            className="bg-ps-light-gray text-ps-primary border-ps-gray hover:bg-ps-primary hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 border-orange-200 hover:from-orange-100 hover:to-orange-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Wrench className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Troubleshooting</span>
@@ -193,7 +193,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('check-compatibility')}
-            className="bg-ps-light-gray text-ps-primary-light border-ps-gray hover:bg-ps-primary-light hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-purple-50 to-purple-100 text-purple-600 border-purple-200 hover:from-purple-100 hover:to-purple-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Check Compatibility</span>
