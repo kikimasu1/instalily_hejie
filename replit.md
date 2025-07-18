@@ -8,6 +8,18 @@ This is a modern, full-stack chat application built for PartSelect's e-commerce 
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### July 18, 2025
+- **PartSelect Color Scheme Implementation**: Successfully implemented the official PartSelect color scheme throughout the entire chat application:
+  - Primary colors: PartSelect teal-blue (#4A6B7C) with darker/lighter variants
+  - Accent colors: Golden yellow (#E6B854) for emphasis and branding
+  - Search functionality: Green (#5A8A6B) for search-related elements
+  - Neutral colors: Professional grays and whites for text and backgrounds
+- **Deepseek API Integration**: Successfully connected and configured Deepseek API with proper authentication
+- **Smart Question Detection**: Implemented intelligent question detection to optimize API usage by only calling AI when users ask actual questions
+- **Professional Branding**: Updated all UI components including header, buttons, message bubbles, and typing indicators to match PartSelect's visual identity
+
 ## System Architecture
 
 ### Frontend Architecture

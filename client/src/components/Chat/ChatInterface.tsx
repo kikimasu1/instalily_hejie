@@ -105,27 +105,27 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="bg-white border-b border-border-light p-3 sm:p-6 flex items-center justify-between shadow-custom-sm">
+      <div className="bg-gradient-to-r from-ps-primary to-ps-primary-light border-b-4 border-ps-accent p-3 sm:p-6 flex items-center justify-between shadow-custom-sm">
         <div className="flex items-center space-x-2 sm:space-x-4">
           {isMobile && (
             <Button
               variant="ghost"
               size="icon"
               onClick={onToggleSidebar}
-              className="text-partselect-blue hover:bg-blue-50 transition-smooth"
+              className="text-ps-white hover:bg-ps-primary-dark transition-smooth"
             >
               <ShoppingCart className="h-5 w-5" />
             </Button>
           )}
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-partselect-blue to-partselect-dark rounded-full flex items-center justify-center shadow-custom-md">
-              <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-ps-accent rounded-full flex items-center justify-center shadow-custom-md">
+              <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-ps-white" />
             </div>
             <div>
-              <h1 className="text-sm sm:text-xl font-semibold text-text-dark">PartSelect AI Assistant</h1>
+              <h1 className="text-sm sm:text-xl font-semibold text-ps-white">PartSelect AI Assistant</h1>
               <div className="flex items-center space-x-2 hidden sm:flex">
-                <div className="w-2 h-2 bg-success-green rounded-full animate-pulse"></div>
-                <p className="text-sm text-gray-600 font-medium">Online • Refrigerator & Dishwasher Parts Expert</p>
+                <div className="w-2 h-2 bg-ps-search rounded-full animate-pulse"></div>
+                <p className="text-sm text-ps-accent font-medium">Online • Refrigerator & Dishwasher Parts Expert</p>
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               // TODO: Clear chat with confirmation
               console.log("Clear chat");
             }}
-            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-smooth"
+            className="text-ps-white hover:text-ps-accent hover:bg-ps-primary-dark transition-smooth"
           >
             <Trash2 className="h-4 w-4" />
           </Button>
@@ -149,7 +149,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
               // TODO: Download chat history
               console.log("Download history");
             }}
-            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-smooth"
+            className="text-ps-white hover:text-ps-accent hover:bg-ps-primary-dark transition-smooth"
           >
             <Download className="h-4 w-4" />
           </Button>
@@ -157,13 +157,13 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
       </div>
 
       {/* Quick Action Buttons */}
-      <div className="bg-white border-b border-border-light p-3 sm:p-6">
+      <div className="bg-ps-white border-b border-ps-gray p-3 sm:p-6">
         <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
           <Button
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('find-parts')}
-            className="bg-gradient-to-r from-blue-50 to-blue-100 text-partselect-blue border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-ps-light-gray text-ps-primary border-ps-gray hover:bg-ps-accent hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Find Parts</span>
@@ -173,7 +173,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('installation-help')}
-            className="bg-gradient-to-r from-green-50 to-green-100 text-success-green border-green-200 hover:from-green-100 hover:to-green-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-ps-light-gray text-ps-search border-ps-gray hover:bg-ps-search hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Bolt className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Installation Help</span>
@@ -183,7 +183,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('troubleshooting')}
-            className="bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 border-orange-200 hover:from-orange-100 hover:to-orange-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-ps-light-gray text-ps-primary border-ps-gray hover:bg-ps-primary hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <Wrench className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Troubleshooting</span>
@@ -193,7 +193,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction('check-compatibility')}
-            className="bg-gradient-to-r from-purple-50 to-purple-100 text-purple-600 border-purple-200 hover:from-purple-100 hover:to-purple-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-ps-light-gray text-ps-primary-light border-ps-gray hover:bg-ps-primary-light hover:text-ps-white transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
           >
             <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Check Compatibility</span>
@@ -206,15 +206,15 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
       <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-6">
         {messages.length === 0 && (
           <div className="flex items-start space-x-2 sm:space-x-4">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-partselect-blue to-partselect-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
-              <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-ps-primary to-ps-primary-dark rounded-full flex items-center justify-center flex-shrink-0 shadow-custom-md">
+              <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-ps-white" />
             </div>
             <div className="flex-1">
-              <div className="bg-white rounded-2xl rounded-tl-sm p-4 sm:p-6 shadow-custom-md border border-border-light max-w-[280px] sm:max-w-lg">
-                <p className="text-gray-900 font-medium text-sm sm:text-base leading-relaxed">Hi! I'm your PartSelect AI assistant. I can help you find refrigerator and dishwasher parts, check compatibility, provide installation guidance, and troubleshoot appliance issues.</p>
-                <p className="text-gray-900 font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">What can I help you with today?</p>
+              <div className="bg-ps-white rounded-2xl rounded-tl-sm p-4 sm:p-6 shadow-custom-md border border-ps-gray max-w-[280px] sm:max-w-lg">
+                <p className="text-ps-text font-medium text-sm sm:text-base leading-relaxed">Hi! I'm your PartSelect AI assistant. I can help you find refrigerator and dishwasher parts, check compatibility, provide installation guidance, and troubleshoot appliance issues.</p>
+                <p className="text-ps-text font-medium mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">What can I help you with today?</p>
               </div>
-              <p className="text-xs text-gray-500 mt-1 sm:mt-2 font-medium">Just now</p>
+              <p className="text-xs text-ps-dark-gray mt-1 sm:mt-2 font-medium">Just now</p>
             </div>
           </div>
         )}
@@ -229,7 +229,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
       </div>
 
       {/* Input Area */}
-      <div className="bg-white border-t border-border-light p-3 sm:p-6 shadow-custom-sm">
+      <div className="bg-ps-white border-t border-ps-gray p-3 sm:p-6 shadow-custom-sm">
         <div className="flex items-end space-x-2 sm:space-x-4">
           <div className="flex-1">
             <div className="relative">
@@ -239,7 +239,7 @@ export default function ChatInterface({ sessionId, onToggleSidebar, isMobile }: 
                 onChange={handleTextareaChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask about parts..."
-                className="pr-16 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
+                className="pr-16 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-ps-text placeholder:text-ps-dark-gray border-2 border-ps-gray focus:border-ps-primary rounded-xl transition-smooth shadow-custom-sm"
                 rows={1}
               />
               <div className="absolute right-2 sm:right-3 bottom-2 sm:bottom-3 flex items-center space-x-1">

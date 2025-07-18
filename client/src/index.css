@@ -24,20 +24,23 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* PartSelect specific colors */
-  --partselect-blue: hsl(225, 83%, 53%);
-  --partselect-blue-light: hsl(217, 91%, 60%);
-  --partselect-dark: hsl(225, 83%, 45%);
-  --success-green: hsl(142, 76%, 36%);
-  --warning-orange: hsl(38, 92%, 50%);
-  --purple-accent: hsl(262, 83%, 58%);
-  --background-gray: hsl(210, 20%, 98%);
-  --background-gradient: linear-gradient(135deg, hsl(210, 20%, 98%) 0%, hsl(215, 25%, 97%) 100%);
-  --text-dark: hsl(210, 22%, 15%);
-  --border-light: hsl(214, 32%, 91%);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+  /* PartSelect Official Color Scheme */
+  --ps-primary: #4A6B7C;        /* Main teal-blue from navigation */
+  --ps-primary-dark: #3A5A6B;   /* Darker variant for hover states */
+  --ps-primary-light: #5A7B8C;  /* Lighter variant for secondary elements */
+  --ps-accent: #E6B854;         /* Golden yellow from "Find Your Part" */
+  --ps-accent-light: #F2C968;   /* Light golden */
+  --ps-accent-dark: #D4A640;    /* Dark golden */
+  --ps-search: #5A8A6B;         /* Green from search button */
+  --ps-search-hover: #4A7A5B;   /* Search button hover */
+  --ps-white: #FFFFFF;          /* Pure white */
+  --ps-light-gray: #F8F9FA;     /* Light gray background */
+  --ps-gray: #E9ECEF;           /* Borders and dividers */
+  --ps-dark-gray: #6C757D;      /* Secondary text */
+  --ps-text: #212529;           /* Main text color */
+  --shadow-sm: 0 2px 8px rgba(74, 107, 124, 0.1);
+  --shadow-md: 0 4px 16px rgba(74, 107, 124, 0.12);
+  --shadow-lg: 0 8px 32px rgba(74, 107, 124, 0.15);
 }
 
 .dark {
@@ -85,52 +88,81 @@
     animation-delay: 0.2s;
   }
   
-  .partselect-blue {
-    color: var(--partselect-blue);
+  /* PartSelect Color Utilities */
+  .text-ps-primary {
+    color: var(--ps-primary);
   }
   
-  .bg-partselect-blue {
-    background-color: var(--partselect-blue);
+  .text-ps-accent {
+    color: var(--ps-accent);
   }
   
-  .bg-partselect-blue-light {
-    background-color: var(--partselect-blue-light);
+  .text-ps-text {
+    color: var(--ps-text);
   }
   
-  .border-partselect-blue {
-    border-color: var(--partselect-blue);
+  .text-ps-dark-gray {
+    color: var(--ps-dark-gray);
   }
   
-  .success-green {
-    color: var(--success-green);
+  .bg-ps-primary {
+    background-color: var(--ps-primary);
   }
   
-  .bg-success-green {
-    background-color: var(--success-green);
+  .bg-ps-primary-dark {
+    background-color: var(--ps-primary-dark);
   }
   
-  .bg-warning-orange {
-    background-color: var(--warning-orange);
+  .bg-ps-primary-light {
+    background-color: var(--ps-primary-light);
   }
   
-  .bg-purple-accent {
-    background-color: var(--purple-accent);
+  .bg-ps-accent {
+    background-color: var(--ps-accent);
   }
   
-  .bg-background-gray {
-    background-color: var(--background-gray);
+  .bg-ps-accent-light {
+    background-color: var(--ps-accent-light);
   }
   
-  .bg-background-gradient {
-    background: var(--background-gradient);
+  .bg-ps-search {
+    background-color: var(--ps-search);
   }
   
-  .text-text-dark {
-    color: var(--text-dark);
+  .bg-ps-light-gray {
+    background-color: var(--ps-light-gray);
   }
   
-  .border-border-light {
-    border-color: var(--border-light);
+  .bg-ps-white {
+    background-color: var(--ps-white);
+  }
+  
+  .border-ps-gray {
+    border-color: var(--ps-gray);
+  }
+  
+  .border-ps-accent {
+    border-color: var(--ps-accent);
+  }
+  
+  .border-ps-primary {
+    border-color: var(--ps-primary);
+  }
+  
+  .hover\:bg-ps-primary-dark:hover {
+    background-color: var(--ps-primary-dark);
+  }
+  
+  .hover\:bg-ps-accent-light:hover {
+    background-color: var(--ps-accent-light);
+  }
+  
+  .hover\:bg-ps-search-hover:hover {
+    background-color: var(--ps-search-hover);
+  }
+  
+  .hover\:border-ps-accent:hover {
+    border-color: var(--ps-accent);
   }
   
   .shadow-custom-sm {
