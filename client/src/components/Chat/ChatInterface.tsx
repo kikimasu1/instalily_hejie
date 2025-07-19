@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useChat } from "@/hooks/useChat";
+import { useCart } from "@/hooks/useCart";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 import ChatDownloadModal from "./ChatDownloadModal";
@@ -39,6 +40,7 @@ export default function ChatInterface({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { messages, sendMessage, isLoading } = useChat(sessionId);
+  const { cartData } = useCart(sessionId);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -153,16 +155,6 @@ export default function ChatInterface({
       {/* Header */}
       <div className="bg-white border-b border-border-light p-3 sm:p-6 flex items-center justify-between shadow-custom-sm">
         <div className="flex items-center space-x-2 sm:space-x-4">
-          {isMobile && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onToggleSidebar}
-              className="text-partselect-blue hover:bg-blue-50 transition-smooth"
-            >
-              <ShoppingCart className="h-5 w-5" />
-            </Button>
-          )}
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="w-8 h-8 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-custom-md overflow-hidden">
               <img
@@ -185,6 +177,20 @@ export default function ChatInterface({
           </div>
         </div>
         <div className="flex items-center space-x-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleSidebar}
+            className="text-partselect-blue hover:bg-blue-50 transition-smooth relative"
+            title="Shopping Cart"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            {cartData && cartData.itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cartData.itemCount}
+              </span>
+            )}
+          </Button>
           <Link href="/analytics">
             <Button
               variant="ghost"
