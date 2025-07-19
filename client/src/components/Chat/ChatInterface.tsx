@@ -210,12 +210,12 @@ export default function ChatInterface({
 
       {/* Quick Action Buttons */}
       <div className="bg-white border-b border-border-light p-3 sm:p-6">
-        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
+        <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide pb-2 sm:pb-0 sm:flex-wrap">
           <Button
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction("find-parts")}
-            className="bg-gradient-to-r from-blue-50 to-blue-100 text-partselect-blue border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-blue-50 to-blue-100 text-partselect-blue border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-smooth hover-lift shadow-custom-sm font-medium px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm whitespace-nowrap flex-shrink-0"
           >
             <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Find Parts</span>
@@ -225,7 +225,7 @@ export default function ChatInterface({
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction("installation-help")}
-            className="bg-gradient-to-r from-green-50 to-green-100 text-success-green border-green-200 hover:from-green-100 hover:to-green-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-green-50 to-green-100 text-success-green border-green-200 hover:from-green-100 hover:to-green-200 transition-smooth hover-lift shadow-custom-sm font-medium px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm whitespace-nowrap flex-shrink-0"
           >
             <Bolt className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Installation Help</span>
@@ -235,7 +235,7 @@ export default function ChatInterface({
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction("troubleshooting")}
-            className="bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 border-orange-200 hover:from-orange-100 hover:to-orange-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 border-orange-200 hover:from-orange-100 hover:to-orange-200 transition-smooth hover-lift shadow-custom-sm font-medium px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm whitespace-nowrap flex-shrink-0"
           >
             <Wrench className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Troubleshooting</span>
@@ -245,7 +245,7 @@ export default function ChatInterface({
             variant="outline"
             size="sm"
             onClick={() => handleQuickAction("check-compatibility")}
-            className="bg-gradient-to-r from-purple-50 to-purple-100 text-purple-600 border-purple-200 hover:from-purple-100 hover:to-purple-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+            className="bg-gradient-to-r from-purple-50 to-purple-100 text-purple-600 border-purple-200 hover:from-purple-100 hover:to-purple-200 transition-smooth hover-lift shadow-custom-sm font-medium px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm whitespace-nowrap flex-shrink-0"
           >
             <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Check Compatibility</span>
@@ -333,7 +333,7 @@ export default function ChatInterface({
                 onChange={handleTextareaChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask about parts..."
-                className="w-full pr-12 sm:pr-24 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
+                className="w-full pr-10 sm:pr-20 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
                 rows={1}
               />
               <div className="absolute right-2 sm:right-3 bottom-2 sm:bottom-3 flex items-center space-x-1">
@@ -341,7 +341,17 @@ export default function ChatInterface({
                   variant="ghost"
                   size="icon"
                   onClick={handleFileUpload}
-                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg"
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg sm:hidden"
+                  title="Upload Image"
+                >
+                  <Camera className="h-3 w-3 sm:h-4 sm:w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleFileUpload}
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg hidden sm:flex"
+                  title="Attach File"
                 >
                   <Paperclip className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
@@ -350,6 +360,7 @@ export default function ChatInterface({
                   size="icon"
                   onClick={handleFileUpload}
                   className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg hidden sm:flex"
+                  title="Upload Image"
                 >
                   <Camera className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
