@@ -389,7 +389,4 @@ When reporting issues, please include:
 <div align="center">
   <p><strong>Built with ❤️ for the DIY community</strong></p>
   <p>Helping homeowners fix what matters most since 1999</p>
-  
-  [![GitHub stars](https://img.shields.io/github/stars/your-username/partselect-ai-chat?style=social)](https://github.com/your-username/partselect-ai-chat/stargazers)
-  [![GitHub forks](https://img.shields.io/github/forks/your-username/partselect-ai-chat?style=social)](https://github.com/your-username/partselect-ai-chat/network/members)
 </div>
