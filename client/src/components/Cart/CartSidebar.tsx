@@ -23,7 +23,7 @@ export default function CartSidebar({ sessionId, onClose, isMobile = false }: Ca
         <div className="p-4 border-b border-border-light">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-text-dark">Shopping Cart</h2>
-            {isMobile && onClose && (
+            {onClose && (
               <Button variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-5 w-5" />
               </Button>
@@ -49,7 +49,7 @@ export default function CartSidebar({ sessionId, onClose, isMobile = false }: Ca
             <span className="bg-partselect-blue text-white text-xs px-2 py-1 rounded-full">
               {itemCount}
             </span>
-            {isMobile && onClose && (
+            {onClose && (
               <Button variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>

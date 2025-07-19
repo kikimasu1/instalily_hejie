@@ -41,10 +41,13 @@ export default function ChatPage() {
   return (
     <div className="h-screen overflow-hidden bg-background-gradient">
       <div className="flex h-full w-full">
-        {/* Desktop Sidebar - Only show when cart has items */}
-        {!isMobile && cartData && cartData.items.length > 0 && (
+        {/* Desktop Sidebar - Show when sidebar is open */}
+        {!isMobile && isSidebarOpen && (
           <div className="w-80 flex-shrink-0">
-            <CartSidebar sessionId={sessionId} />
+            <CartSidebar 
+              sessionId={sessionId} 
+              onClose={() => setIsSidebarOpen(false)}
+            />
           </div>
         )}
 

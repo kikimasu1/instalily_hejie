@@ -145,8 +145,12 @@ The application is designed to be easily deployable with minimal configuration c
 - **Maintained sample query buttons** at bottom of input area for suggested questions
 - **Enhanced mobile responsiveness**:
   - Quick action buttons now horizontally scrollable on mobile with scrollbar hidden
-  - Camera button always visible on mobile for easy image uploads
   - Improved text input padding for better touch interaction
   - Better spacing and sizing for mobile devices
   - Safe area handling for modern mobile devices
+- **Shopping cart improvements**:
+  - Cart button moved to top right corner for both web and mobile
+  - Cart sidebar now opens on both platforms when button is clicked
+  - Close button available on both desktop and mobile cart views
+  - Cart opens regardless of whether it contains items
 - **Balanced approach** - kept main navigation quick actions while removing contextual chat interruptions
