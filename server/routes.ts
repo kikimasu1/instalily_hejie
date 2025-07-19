@@ -48,8 +48,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           content: msg.content
         }));
 
-      // Generate AI response
-      const aiResponse = await deepseekService.processUserMessage(message, conversationHistory);
+      // Generate AI response with contextual buttons
+      const { content: aiResponse, buttons } = await deepseekService.processUserMessage(message, conversationHistory);
       
       // Save AI response
       const savedResponse = await storage.createChatMessage({
@@ -61,6 +61,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json({ 
         message: savedResponse,
+        buttons,
         sessionId 
       });
     } catch (error) {
@@ -477,7 +478,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                     content: msg.content
                   }));
 
-                const aiResponse = await deepseekService.processUserMessage(content, conversationHistory);
+                const { content: aiResponse, buttons } = await deepseekService.processUserMessage(content, conversationHistory);
                 const responseTime = Date.now() - startTime;
                 
                 // Track AI response analytics
@@ -499,7 +500,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   productCards: []
                 });
 
-                // Broadcast AI response
+                // Broadcast AI response with contextual buttons
                 wss.clients.forEach((client: WebSocketWithSession) => {
                   if (client.sessionId === sessionId && 
                       client.readyState === WebSocket.OPEN) {
@@ -509,7 +510,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
                         content: aiResponse,
                         isUser: false,
                         timestamp: new Date()
-                      }
+                      },
+                      buttons
                     }));
                   }
                 });

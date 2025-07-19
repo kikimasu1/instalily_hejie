@@ -10,6 +10,7 @@ interface ChatData {
 export function useChat(sessionId: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [contextualButtons, setContextualButtons] = useState<any[]>([]);
   const wsRef = useRef<WebSocket | null>(null);
   const queryClient = useQueryClient();
 
@@ -35,7 +36,11 @@ export function useChat(sessionId: string) {
       const response = await apiRequest("POST", "/api/chat", requestBody);
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      // Update contextual buttons if they come from the response
+      if (data.buttons) {
+        setContextualButtons(data.buttons);
+      }
       queryClient.invalidateQueries({ queryKey: ["/api/chat", sessionId] });
     },
   });
@@ -64,6 +69,11 @@ export function useChat(sessionId: string) {
         
         if (data.type === "message") {
           setMessages(prev => [...prev, data.message]);
+          
+          // Update contextual buttons if they come with AI response
+          if (data.buttons && !data.message.isUser) {
+            setContextualButtons(data.buttons);
+          }
         }
         
         if (data.type === "typing") {
@@ -95,6 +105,9 @@ export function useChat(sessionId: string) {
   }, [chatData]);
 
   const sendMessage = async (message: string, imageData?: {dataUrl: string, name: string}) => {
+    // Clear contextual buttons when sending a new message
+    setContextualButtons([]);
+    
     // Always use HTTP API for image uploads, use WebSocket for text-only messages
     if (imageData) {
       await sendMessageMutation.mutateAsync({ message, imageData });
@@ -129,5 +142,6 @@ export function useChat(sessionId: string) {
     sendTyping,
     isLoading: sendMessageMutation.isPending,
     isTyping,
+    contextualButtons,
   };
 }

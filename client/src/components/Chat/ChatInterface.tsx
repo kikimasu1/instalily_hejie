@@ -21,6 +21,7 @@ import {
 
 } from "lucide-react";
 import { Link } from "wouter";
+import InteractiveButtons from "./InteractiveButtons";
 
 interface ChatInterfaceProps {
   sessionId: string;
@@ -40,7 +41,7 @@ export default function ChatInterface({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { messages, sendMessage, isLoading } = useChat(sessionId);
+  const { messages, sendMessage, isLoading, contextualButtons } = useChat(sessionId);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -299,6 +300,25 @@ export default function ChatInterface({
             }}
           />
         ))}
+
+        {/* Show contextual buttons after the last AI response */}
+        {contextualButtons.length > 0 && messages.length > 0 && !messages[messages.length - 1].isUser && (
+          <div className="flex justify-start mb-4">
+            <div className="max-w-[280px] sm:max-w-lg">
+              <InteractiveButtons
+                options={contextualButtons}
+                onSelect={(action) => {
+                  setMessage(action);
+                  setTimeout(() => {
+                    handleSendMessage();
+                  }, 100);
+                }}
+                title="Quick Actions"
+                description="Choose what you'd like to do next:"
+              />
+            </div>
+          </div>
+        )}
 
         {isTyping && <TypingIndicator />}
 

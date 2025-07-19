@@ -7,6 +7,13 @@ export interface DeepseekResponse {
   }>;
 }
 
+export interface ContextualButton {
+  id: string;
+  text: string;
+  category: string;
+  action: string;
+}
+
 export interface DeepseekMessage {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -56,7 +63,134 @@ When users need order support, help with:
 - track_order(order_number) - Check order status
 - process_return(order_number, reason) - Handle returns/exchanges
 
-Always stay focused on appliance parts and related services. When showing products, emphasize the benefits of genuine PartSelect parts and our expertise since 1999.`;
+Always stay focused on appliance parts and related services. When showing products, emphasize the benefits of genuine PartSelect parts and our expertise since 1999.
+
+**CONTEXTUAL QUICK ACTIONS:**
+At the end of your response, suggest 2-3 relevant quick action buttons based on the conversation context. Format them as:
+QUICK_ACTIONS: [{"id":"1","text":"Find water filters","category":"filter","action":"search for water filters for my refrigerator model"},{"id":"2","text":"Check compatibility","category":"part","action":"verify part compatibility with my appliance model"}]
+
+Only suggest actions that are directly relevant to what the user is asking about or the appliance issue they're describing.`;
+
+const generateContextualButtons = (userMessage: string, aiResponse: string): ContextualButton[] => {
+  const buttons: ContextualButton[] = [];
+  const lowerMessage = userMessage.toLowerCase();
+  const lowerResponse = aiResponse.toLowerCase();
+  
+  // Part-specific suggestions
+  if (lowerMessage.includes('water filter') || lowerResponse.includes('water filter')) {
+    buttons.push({
+      id: 'water_filter',
+      text: 'Shop water filters',
+      category: 'filter',
+      action: 'show me water filters for my refrigerator'
+    });
+  }
+  
+  if (lowerMessage.includes('door seal') || lowerResponse.includes('door seal')) {
+    buttons.push({
+      id: 'door_seal',
+      text: 'Find door seals',
+      category: 'seal',
+      action: 'find door seals for my appliance'
+    });
+  }
+  
+  if (lowerMessage.includes('ice maker') || lowerResponse.includes('ice maker')) {
+    buttons.push({
+      id: 'ice_maker',
+      text: 'Ice maker parts',
+      category: 'part',
+      action: 'show ice maker replacement parts'
+    });
+  }
+  
+  // Appliance-specific suggestions
+  if (lowerMessage.includes('dishwasher') || lowerResponse.includes('dishwasher')) {
+    buttons.push({
+      id: 'dishwasher_parts',
+      text: 'Dishwasher parts',
+      category: 'dishwasher',
+      action: 'find parts for my dishwasher model'
+    });
+  }
+  
+  if (lowerMessage.includes('refrigerator') || lowerResponse.includes('refrigerator')) {
+    buttons.push({
+      id: 'refrigerator_parts',
+      text: 'Refrigerator parts',
+      category: 'appliance',
+      action: 'find parts for my refrigerator model'
+    });
+  }
+  
+  // Action-specific suggestions
+  if (lowerMessage.includes('install') || lowerResponse.includes('install')) {
+    buttons.push({
+      id: 'installation',
+      text: 'Installation guide',
+      category: 'repair',
+      action: 'show me installation instructions'
+    });
+  }
+  
+  if (lowerMessage.includes('compatible') || lowerResponse.includes('compatible')) {
+    buttons.push({
+      id: 'compatibility',
+      text: 'Check compatibility',
+      category: 'part',
+      action: 'verify part compatibility with my model'
+    });
+  }
+  
+  if (lowerMessage.includes('troubleshoot') || lowerResponse.includes('troubleshoot') || lowerMessage.includes('not working')) {
+    buttons.push({
+      id: 'troubleshoot',
+      text: 'Troubleshooting help',
+      category: 'repair',
+      action: 'help me troubleshoot this issue'
+    });
+  }
+  
+  // Order-related suggestions
+  if (lowerMessage.includes('order') || lowerMessage.includes('track') || lowerMessage.includes('shipping')) {
+    buttons.push({
+      id: 'order_status',
+      text: 'Track my order',
+      category: 'tracking',
+      action: 'check my order status'
+    });
+  }
+  
+  if (lowerMessage.includes('return') || lowerMessage.includes('exchange')) {
+    buttons.push({
+      id: 'returns',
+      text: 'Return/Exchange',
+      category: 'return',
+      action: 'start a return or exchange'
+    });
+  }
+  
+  // Default suggestions if no specific context
+  if (buttons.length === 0) {
+    buttons.push(
+      {
+        id: 'search_parts',
+        text: 'Find parts',
+        category: 'part',
+        action: 'help me find the right parts'
+      },
+      {
+        id: 'model_lookup',
+        text: 'Enter model number',
+        category: 'appliance',
+        action: 'check parts for my specific model'
+      }
+    );
+  }
+  
+  // Limit to 3 buttons maximum
+  return buttons.slice(0, 3);
+};
 
 export class DeepseekService {
   private apiKey: string;
@@ -123,10 +257,12 @@ export class DeepseekService {
     }
   }
 
-  async processUserMessage(userMessage: string, conversationHistory: DeepseekMessage[] = []): Promise<string> {
+  async processUserMessage(userMessage: string, conversationHistory: DeepseekMessage[] = []): Promise<{ content: string; buttons: ContextualButton[] }> {
     // Check for order support requests and provide dummy placeholder responses
     if (this.isOrderSupportRequest(userMessage)) {
-      return this.generateOrderSupportResponse(userMessage);
+      const content = this.generateOrderSupportResponse(userMessage);
+      const buttons = generateContextualButtons(userMessage, content);
+      return { content, buttons };
     }
 
     const messages: DeepseekMessage[] = [
@@ -134,7 +270,9 @@ export class DeepseekService {
       { role: 'user', content: userMessage }
     ];
 
-    return await this.generateResponse(messages);
+    const content = await this.generateResponse(messages);
+    const buttons = generateContextualButtons(userMessage, content);
+    return { content, buttons };
   }
 
   private isOrderSupportRequest(message: string): boolean {
