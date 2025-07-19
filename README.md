@@ -3,27 +3,26 @@
 <div align="center">
   <img src="https://i.ibb.co/HDDX9wDq/Wechat-IMG140.png" alt="PartSelect Logo" width="120" height="120" style="border-radius: 50%;">
   
-  <h3>Intelligent AI-Powered Customer Support for Appliance Parts Discovery</h3>
+  <h3>AI-Powered Chat Interface for Appliance Parts Discovery</h3>
   
-  [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://partselect-ai-chat.replit.app)
   [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
   [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-  [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+  [![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 </div>
 
 ## 🚀 Overview
 
-PartSelect AI Chat Agent is a sophisticated, AI-powered customer support system designed specifically for appliance parts discovery and e-commerce. Built with modern web technologies, it provides an intuitive chat interface that helps customers find the right parts for their appliances through natural language conversations.
+A modern chat interface built for PartSelect's appliance parts business. This application demonstrates AI-powered customer conversations with product recommendations, built using React, Express.js, and the Deepseek AI API.
 
-### Key Features
+### Current Features
 
-- **🤖 AI-Powered Conversations** - Natural language processing using Deepseek AI for intelligent customer interactions
-- **📱 Mobile-First Design** - Fully responsive interface optimized for all devices
-- **🛒 Integrated Shopping Cart** - Seamless add-to-cart functionality directly from chat recommendations
-- **⚡ Real-Time Communication** - WebSocket-powered instant messaging with typing indicators
-- **📊 Analytics Dashboard** - Comprehensive analytics for conversation metrics and user behavior
-- **🎯 Product Discovery** - Visual product cards with compatibility checking and instant recommendations
-- **🔍 Smart Search** - Context-aware product search with image upload capabilities
+- **🤖 AI Chat Interface** - Natural language conversations using Deepseek AI
+- **📱 Responsive Design** - Mobile-optimized interface that works on all screen sizes
+- **🛒 Shopping Cart** - Add products to cart directly from chat recommendations
+- **⚡ Real-Time Messaging** - WebSocket communication with typing indicators
+- **📊 Basic Analytics** - Simple analytics dashboard for conversation tracking
+- **🎯 Product Cards** - Visual product display with mock product data
+- **📎 File Upload** - Image upload capability for customer support
 
 ## 🛠️ Technology Stack
 
@@ -36,17 +35,17 @@ PartSelect AI Chat Agent is a sophisticated, AI-powered customer support system 
 - **Wouter** for lightweight client-side routing
 
 ### Backend
-- **Express.js** with TypeScript for robust API development
+- **Express.js** with TypeScript for API development
 - **WebSocket** integration for real-time chat functionality
 - **Deepseek AI** integration for natural language processing
-- **Drizzle ORM** configured for PostgreSQL (production-ready)
-- **In-memory storage** for development with database interface
+- **In-memory storage** for session data (chat history, cart items)
+- **Static product data** for demonstration purposes
 
 ### Development & Deployment
-- **Replit** platform integration with specialized build plugins
-- **ESBuild** for efficient server-side bundling
+- **Vite** for fast frontend development and building
 - **Hot Module Replacement** for rapid development iteration
-- **TypeScript** compilation across frontend, backend, and shared code
+- **TypeScript** compilation across frontend and backend
+- **Replit-ready** with npm run dev workflow
 
 ## 🏗️ Architecture
 
@@ -54,21 +53,21 @@ PartSelect AI Chat Agent is a sophisticated, AI-powered customer support system 
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   React Client  │    │  Express Server │    │   Deepseek AI   │
 │                 │    │                 │    │                 │
-│ • Chat Interface│◄──►│ • WebSocket API │◄──►│ • NLP Processing│
-│ • Product Cards │    │ • REST Endpoints│    │ • Chat Responses│
-│ • Shopping Cart │    │ • Product Search│    │ • Intent Analysis│
+│ • Chat Interface│◄──►│ • WebSocket API │◄──►│ • Chat Responses│
+│ • Product Cards │    │ • REST Endpoints│    │ • Product Suggest│
+│ • Shopping Cart │    │ • Static Data   │    │                 │
 │ • Analytics     │    │ • Session Mgmt  │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  TanStack Query │    │   In-Memory DB  │    │  Product Database│
-│                 │    │                 │    │                 │
-│ • Data Caching  │    │ • Chat History  │    │ • Parts Catalog │
-│ • State Sync    │    │ • Cart Items    │    │ • Compatibility │
-│ • Optimistic UI │    │ • User Sessions │    │ • Pricing Info  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       
+         │                       │                       
+         ▼                       ▼                       
+┌─────────────────┐    ┌─────────────────┐    
+│  TanStack Query │    │   In-Memory     │    
+│                 │    │   Storage       │    
+│ • Data Caching  │    │                 │    
+│ • State Sync    │    │ • Chat History  │    
+│ • API Calls     │    │ • Cart Items    │    
+└─────────────────┘    └─────────────────┘    
 ```
 
 ## 🚀 Quick Start
@@ -114,34 +113,32 @@ PartSelect AI Chat Agent is a sophisticated, AI-powered customer support system 
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `DEEPSEEK_API_KEY` | API key for Deepseek AI service | Yes |
-| `DATABASE_URL` | PostgreSQL connection string (production) | No |
 | `NODE_ENV` | Environment (development/production) | No |
 
 ## 📱 Features in Detail
 
 ### AI Chat Interface
-- **Natural Language Processing**: Understanding customer queries in plain English
-- **Context Awareness**: Maintains conversation history for coherent interactions
-- **Product Recommendations**: AI suggests relevant parts based on customer descriptions
-- **Image Upload**: Customers can upload photos of broken parts for identification
+- **Natural Language Processing**: Uses Deepseek AI to understand customer queries
+- **Conversation Flow**: Maintains chat history within session
+- **Product Suggestions**: AI can recommend products based on descriptions
+- **File Upload**: Supports image uploads for customer support scenarios
 
-### E-commerce Integration
-- **Real-time Product Cards**: Visual product display with images, prices, and compatibility
-- **One-Click Add to Cart**: Streamlined purchase flow directly from chat
-- **Inventory Integration**: Live stock status and pricing information
-- **Compatibility Checking**: Automatic verification of part compatibility with appliance models
+### Shopping Cart Features
+- **Product Cards**: Visual display of recommended products with mock data
+- **Add to Cart**: Users can add items to cart from chat recommendations
+- **Cart Sidebar**: Responsive cart that opens on both mobile and desktop
+- **Session Storage**: Cart contents persist during the session
 
-### Responsive Design
-- **Mobile-First**: Optimized touch interfaces and responsive layouts
-- **Cross-Platform**: Consistent experience across desktop, tablet, and mobile
-- **Accessibility**: WCAG compliant with keyboard navigation and screen reader support
-- **Progressive Web App**: App-like experience with offline capabilities
+### Responsive Interface
+- **Mobile-First Design**: Touch-optimized interface for mobile devices
+- **Desktop Support**: Full-featured desktop experience
+- **Responsive Navigation**: Horizontally scrollable quick action buttons on mobile
+- **Cross-Browser**: Works on modern web browsers
 
-### Analytics & Insights
-- **Conversation Metrics**: Track response times, user satisfaction, and conversion rates
-- **User Behavior**: Analyze interaction patterns and popular product categories
-- **Performance Monitoring**: Real-time system health and response time tracking
-- **Business Intelligence**: Actionable insights for inventory and customer service optimization
+### Basic Analytics
+- **Simple Dashboard**: Basic analytics page showing conversation data
+- **Mock Metrics**: Demonstrates analytics concepts with sample data
+- **Performance Tracking**: Basic system monitoring capabilities
 
 ## 🗂️ Project Structure
 
@@ -187,10 +184,9 @@ npm run build
 # Type checking
 npm run type-check
 
-# Database operations (when using PostgreSQL)
-npm run db:generate  # Generate migrations
-npm run db:migrate   # Run migrations
-npm run db:studio    # Open database studio
+# Linting and type checking
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript type checking
 ```
 
 ### Key Development Commands
@@ -266,36 +262,28 @@ Response: { sessionMetrics: object, behaviorData: object }
 ### Production Build
 
 ```bash
-# Build the application
+# Build the frontend
 npm run build
 
-# Start production server
-npm start
+# Start the server (development mode)
+npm run dev
 ```
 
 ### Environment Setup
 
-1. **Set production environment variables**
+1. **Set environment variables**
    ```bash
-   export NODE_ENV=production
-   export DEEPSEEK_API_KEY=your_production_key
-   export DATABASE_URL=your_postgresql_url
+   export DEEPSEEK_API_KEY=your_api_key
    ```
 
-2. **Database Migration**
-   ```bash
-   npm run db:migrate
-   ```
-
-3. **Static Asset Serving**
-   The Express server automatically serves built frontend assets from the `client/dist` directory.
+2. **Static Asset Serving**
+   The Express server serves built frontend assets from the `client/dist` directory.
 
 ### Deployment Platforms
 
-- **Replit**: Integrated deployment with automatic HTTPS and custom domains
-- **Vercel**: Frontend deployment with serverless functions
-- **Railway**: Full-stack deployment with PostgreSQL
-- **Heroku**: Traditional PaaS deployment option
+- **Replit**: Ready for Replit deployment with npm run dev
+- **Vercel/Netlify**: Frontend can be deployed separately
+- **Any Node.js host**: Standard Express.js application
 
 ## 🤝 Contributing
 
@@ -319,29 +307,28 @@ We welcome contributions from the community! Here's how to get started:
 
 ### Areas for Contribution
 
-- 🌐 Internationalization (i18n) support
-- 🎨 UI/UX improvements and animations
-- 🔍 Advanced search and filtering capabilities
-- 📊 Enhanced analytics and reporting features
+- 🗄️ Database integration (PostgreSQL, MongoDB)
+- 🔐 User authentication and session management
 - 🧪 Unit and integration testing
-- 📱 Progressive Web App features
+- 🎨 UI/UX improvements and animations
+- 📊 Real analytics with actual data persistence
+- 🌐 Internationalization (i18n) support
 
 ## 📊 Performance Metrics
 
-### Current Benchmarks
+### Current Performance
 
-- **Initial Page Load**: < 2.5 seconds
-- **Chat Response Time**: < 500ms average
-- **Mobile Performance**: 95+ Lighthouse score
-- **Accessibility**: WCAG 2.1 AA compliant
-- **Bundle Size**: < 200KB gzipped
+- **Frontend**: Fast Vite build and hot reload
+- **Chat Response**: Depends on Deepseek API response time
+- **Mobile**: Responsive design works on mobile devices
+- **Bundle Size**: Optimized with Vite build process
 
-### Scalability
+### Current Limitations
 
-- **Concurrent Users**: 1,000+ simultaneous chat sessions
-- **Database**: Ready for PostgreSQL with optimized queries
-- **CDN Ready**: Static assets optimized for global distribution
-- **Caching**: Intelligent data caching with TanStack Query
+- **Storage**: In-memory only (data lost on server restart)
+- **Scalability**: Single-server deployment
+- **Authentication**: No user authentication system
+- **Database**: No persistent database integration
 
 ## 🛡️ Security
 
