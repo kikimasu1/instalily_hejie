@@ -333,7 +333,7 @@ export default function ChatInterface({
                 onChange={handleTextareaChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask about parts..."
-                className="w-full pr-10 sm:pr-20 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
+                className="w-full pr-16 sm:pr-20 resize-none min-h-[44px] sm:min-h-[52px] max-h-[120px] text-sm sm:text-base font-medium text-gray-900 placeholder:text-gray-500 border-2 border-gray-200 focus:border-partselect-blue rounded-xl transition-smooth shadow-custom-sm"
                 rows={1}
               />
               <div className="absolute right-2 sm:right-3 bottom-2 sm:bottom-3 flex items-center space-x-1">
@@ -341,16 +341,7 @@ export default function ChatInterface({
                   variant="ghost"
                   size="icon"
                   onClick={handleFileUpload}
-                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg sm:hidden"
-                  title="Upload Image"
-                >
-                  <Camera className="h-3 w-3 sm:h-4 sm:w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleFileUpload}
-                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg hidden sm:flex"
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg"
                   title="Attach File"
                 >
                   <Paperclip className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -359,7 +350,7 @@ export default function ChatInterface({
                   variant="ghost"
                   size="icon"
                   onClick={handleFileUpload}
-                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg hidden sm:flex"
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400 hover:text-partselect-blue transition-smooth hover:bg-blue-50 rounded-lg"
                   title="Upload Image"
                 >
                   <Camera className="h-3 w-3 sm:h-4 sm:w-4" />
