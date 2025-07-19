@@ -7,6 +7,10 @@ import TypingIndicator from "./TypingIndicator";
 import ChatDownloadModal from "./ChatDownloadModal";
 import {
   ShoppingCart,
+  Search,
+  Wrench,
+  Bolt,
+  CheckCircle,
   Send,
   Paperclip,
   Camera,
@@ -76,6 +80,27 @@ export default function ChatInterface({
     const textarea = e.target;
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
+  };
+
+  const insertSampleQuery = (query: string) => {
+    setMessage(query);
+    textareaRef.current?.focus();
+  };
+
+  const handleQuickAction = (action: string) => {
+    const actionMessages = {
+      "find-parts": "I need help finding parts for my appliance",
+      "installation-help": "I need installation instructions for a part",
+      troubleshooting:
+        "I'm having issues with my appliance and need troubleshooting help",
+      "check-compatibility":
+        "I need to check if a part is compatible with my appliance",
+    };
+
+    const actionMessage = actionMessages[action as keyof typeof actionMessages];
+    if (actionMessage) {
+      insertSampleQuery(actionMessage);
+    }
   };
 
 
@@ -183,7 +208,51 @@ export default function ChatInterface({
         </div>
       </div>
 
-
+      {/* Quick Action Buttons */}
+      <div className="bg-white border-b border-border-light p-3 sm:p-6">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleQuickAction("find-parts")}
+            className="bg-gradient-to-r from-blue-50 to-blue-100 text-partselect-blue border-blue-200 hover:from-blue-100 hover:to-blue-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+          >
+            <Search className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Find Parts</span>
+            <span className="sm:hidden">Parts</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleQuickAction("installation-help")}
+            className="bg-gradient-to-r from-green-50 to-green-100 text-success-green border-green-200 hover:from-green-100 hover:to-green-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+          >
+            <Bolt className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Installation Help</span>
+            <span className="sm:hidden">Install</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleQuickAction("troubleshooting")}
+            className="bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 border-orange-200 hover:from-orange-100 hover:to-orange-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+          >
+            <Wrench className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Troubleshooting</span>
+            <span className="sm:hidden">Troubleshoot</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleQuickAction("check-compatibility")}
+            className="bg-gradient-to-r from-purple-50 to-purple-100 text-purple-600 border-purple-200 hover:from-purple-100 hover:to-purple-200 transition-smooth hover-lift shadow-custom-sm font-medium px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm"
+          >
+            <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Check Compatibility</span>
+            <span className="sm:hidden">Compatibility</span>
+          </Button>
+        </div>
+      </div>
 
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-6">
